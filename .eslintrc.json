@@ -4,13 +4,12 @@
     "node": true,
     "es6": true
   },
-  "sourceType": "module",
   "parserOptions": {
     "ecmaVersion": 2021
   },
   "rules": {
     "arrow-spacing": ["warn", { "before": true, "after": true }],
-    "brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
+    "brace-style": ["error", "1tbs", { "allowSingleLine": true }],
     "comma-dangle": ["error", "always-multiline"],
     "comma-spacing": "error",
     "comma-style": "error",
@@ -39,7 +38,7 @@
     "space-before-function-paren": [
       "error",
       {
-        "anonymous": "never",
+        "anonymous": "always",
         "named": "never",
         "asyncArrow": "always"
       }

@@ -101,7 +101,7 @@ const foundPath = pathFinder.find(fromNodeId, toNodeId).reverse();
 const pathArray = [];
 let nextNode = '';
 let previousNode = '';
-Array.prototype.unique = function() {
+Array.prototype.unique = function () {
   return Array.from(new Set(this));
 };
 let totalCost = 0;
@@ -109,7 +109,7 @@ let totalTime = 0;
 
 foundPath.forEach((Node) => {
   nextNode = Node.id;
-  links = Node.links.unique();
+  const links = Node.links.unique();
   links.unique().forEach((Link) => {
     if (Link.toId == nextNode && (Link.fromId == previousNode || '')) {
       pathArray.push([Link.fromId, Link.toId, Link.data]);
@@ -118,32 +118,29 @@ foundPath.forEach((Node) => {
   previousNode = Node.id;
 });
 
-filteredPathArray = [];
-k = pathArray.length;
-for (k = 0; k < pathArray.length; k++) {
+const filteredPathArray = [];
+for (let k = 0; k < pathArray.length; k++) {
   if (
     k + 1 < pathArray.length &&
     pathArray[k][0] == pathArray[k + 1][0] &&
     pathArray[k][1] == pathArray[k + 1][1]
   ) {
-    minValue = Math.min(pathArray[k][2].cost, pathArray[k + 1][2].cost);
-    for (o = 0; o < 2; o++) {
+    const minValue = Math.min(pathArray[k][2].cost, pathArray[k + 1][2].cost);
+    for (let o = 0; o < 2; o++) {
       if (pathArray[k + o][2].cost == minValue) {
         filteredPathArray.push(pathArray[k + o]);
       }
     }
-  }
- else if (k > 0) {
+  } else if (k > 0) {
     if (pathArray[k - 1][0] != pathArray[k][0] && pathArray[k - 1][1] != pathArray[k][1]) {
       filteredPathArray.push(pathArray[k]);
     }
-  }
- else if (k == 0) {
+  } else if (k == 0) {
     filteredPathArray.push(pathArray[k]);
   }
 }
 
-responseArray = [];
+const responseArray = [];
 let i = 1;
 filteredPathArray.forEach((Line) => {
   responseArray.push(`${i}. ${Line[0]} => (${Line[2].type}) => ${Line[1]}\n`);
@@ -151,7 +148,5 @@ filteredPathArray.forEach((Line) => {
   totalTime += Line[2].time;
   i++;
 });
-responseArray.push(
-  `   Total cost: ${totalCost} UPX\n   Total time: ${totalTime} minutes`
-);
+responseArray.push(`   Total cost: ${totalCost} UPX\n   Total time: ${totalTime} minutes`);
 console.log(responseArray.join(''));
