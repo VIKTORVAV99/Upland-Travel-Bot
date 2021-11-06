@@ -47,13 +47,10 @@ module.exports = {
     const to = interaction.options.getString('to');
     let method = interaction.options.getString('method');
 
-    const responseArray = [];
-
-    responseArray.push(`Using method: ${(method ??= 'cheapest')}\n`);
-
     if (from != to) {
+      const responseArray = [];
       const filteredPathArray = travelToFrom(from, to, method);
-
+      responseArray.push(`Using method: ${(method ??= 'cheapest')}\n`);
       let i = 1;
       let totalCost = 0;
       let totalTime = 0;
