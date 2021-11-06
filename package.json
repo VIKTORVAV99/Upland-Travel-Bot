@@ -6,7 +6,8 @@
   "license": "ISC",
   "main": "index.js",
   "scripts": {
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@discordjs/builders": "^0.8.2",
