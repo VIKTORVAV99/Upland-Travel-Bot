@@ -1,7 +1,7 @@
 const { graph } = require('./travel-routes.js');
 const { nba } = require('ngraph.path');
 
-Array.prototype.unique = () => {
+Array.prototype.unique = function () {
   return Array.from(new Set(this));
 };
 
@@ -13,16 +13,16 @@ Array.prototype.unique = () => {
  * @returns {array}
  */
 function travelToFrom(from, to, method) {
+  console.log(from, to, method);
   const pathFinder = nba(graph, {
     distance(_fromNode, _toNode, link) {
-      if (method === 'fast') {
+      if (method === 'fastest') {
         return link.data.time;
-      } else if (method === 'cheap' || method === '') {
+      } else if (method === 'cheapest' || method === null) {
         return link.data.cost;
       }
     },
   });
-
   /** Holds the path found by the pathfinder. */
   const foundPath = pathFinder.find(from, to).reverse();
 
@@ -41,7 +41,6 @@ function travelToFrom(from, to, method) {
     });
     previousNode = Node.id;
   });
-
   /** Holds the filtered path as an array. */
   const filteredPathArray = [];
 
@@ -54,18 +53,18 @@ function travelToFrom(from, to, method) {
     ) {
       /** The minimum value for either time or cost. */
       let minValue;
-      if (method === 'fast') {
+      if (method === 'fastest') {
         minValue = Math.min(pathArray[k][2].time, pathArray[k + 1][2].time);
-      } else if (method === 'cheap' || method === '') {
+      } else if (method === 'cheapest' || method === null) {
         minValue = Math.min(pathArray[k][2].cost, pathArray[k + 1][2].cost);
       }
 
       for (let o = 0; o < 2; o++) {
-        if (method === 'fast') {
+        if (method === 'fastest') {
           if (pathArray[k + o][2].time == minValue) {
             filteredPathArray.push(pathArray[k + o]);
           }
-        } else if (method === 'cheap' || method === '') {
+        } else if (method === 'cheapest' || method === null) {
           if (pathArray[k + o][2].cost == minValue) {
             filteredPathArray.push(pathArray[k + o]);
           }
