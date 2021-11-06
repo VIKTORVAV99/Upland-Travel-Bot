@@ -13,7 +13,6 @@ Array.prototype.unique = function () {
  * @returns {array}
  */
 function travelToFrom(from, to, method) {
-  console.log(from, to, method);
   const pathFinder = nba(graph, {
     distance(_fromNode, _toNode, link) {
       if (method === 'fastest') {
