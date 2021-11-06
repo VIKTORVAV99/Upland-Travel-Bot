@@ -34,23 +34,34 @@ module.exports = {
         .setDescription('Enter the destination you are traveling to.')
         .setRequired(true)
         .addChoices(cities.sort())
+    )
+    .addStringOption((option) =>
+      option
+        .setName('method')
+        .setDescription('The method used to find the route')
+        .addChoice('cheap')
+        .addChoice('fast')
     ),
   async execute(interaction) {
     const from = interaction.options.getString('from');
     const to = interaction.options.getString('to');
 
-    const filteredPathArray = travelToFrom(from, to);
-    const responseArray = [];
-    let i = 1;
-    let totalCost = 0;
-    let totalTime = 0;
-    filteredPathArray.forEach((Line) => {
-      responseArray.push(`${i}. ${Line[0]} => (${Line[2].type}) => ${Line[1]}\n`);
-      totalCost += Line[2].cost;
-      totalTime += Line[2].time;
-      i++;
-    });
-    responseArray.push(`   Total cost: ${totalCost} UPX\n   Total time: ${totalTime} minutes`);
-    await interaction.reply(responseArray.join(''));
+    if (from != to) {
+      const filteredPathArray = travelToFrom(from, to);
+      const responseArray = [];
+      let i = 1;
+      let totalCost = 0;
+      let totalTime = 0;
+      filteredPathArray.forEach((Line) => {
+        responseArray.push(`${i}. ${Line[0]} => (${Line[2].type}) => ${Line[1]}\n`);
+        totalCost += Line[2].cost;
+        totalTime += Line[2].time;
+        i++;
+      });
+      responseArray.push(`   Total cost: ${totalCost} UPX\n   Total time: ${totalTime} minutes`);
+      await interaction.reply(responseArray.join(''));
+    } else {
+      await interaction.reply('You are already at the destination!');
+    }
   },
 };
