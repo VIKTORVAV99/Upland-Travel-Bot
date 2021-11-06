@@ -38,9 +38,9 @@ module.exports = {
     .addStringOption((option) =>
       option
         .setName('method')
-        .setDescription('The method used to find the route')
-        .addChoice('cheap')
-        .addChoice('fast')
+        .setDescription('The method used to find the route.')
+        .addChoice('cheap', 'cheap')
+        .addChoice('fast', 'cheap')
     ),
   async execute(interaction) {
     const from = interaction.options.getString('from');
