@@ -41,6 +41,7 @@ module.exports = {
         .setDescription('The method used to find the route.')
         .addChoice('cheapest', 'cheapest')
         .addChoice('fastest', 'fastest')
+        .addChoice('simplest', 'simplest')
     ),
   async execute(interaction) {
     const from = interaction.options.getString('from');
@@ -50,7 +51,7 @@ module.exports = {
     if (from != to) {
       const responseArray = [];
       const filteredPathArray = travelToFrom(from, to, method);
-      responseArray.push(`Using method: ${(method ??= 'cheapest')}\n`);
+      responseArray.push(`Using the ${(method ??= 'simplest')} method:\n`);
       let i = 1;
       let totalCost = 0;
       let totalTime = 0;

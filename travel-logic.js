@@ -13,15 +13,21 @@ Array.prototype.unique = function () {
  * @returns {array}
  */
 function travelToFrom(from, to, method) {
-  const pathFinder = nba(graph, {
-    distance(_fromNode, _toNode, link) {
-      if (method === 'fastest') {
-        return link.data.time;
-      } else if (method === 'cheapest' || method === null) {
-        return link.data.cost;
-      }
-    },
-  });
+  let pathFinder;
+  if (method === 'simplest' || method === null) {
+    pathFinder = nba(graph);
+  } else {
+    pathFinder = nba(graph, {
+      distance(_fromNode, _toNode, link) {
+        if (method === 'fastest') {
+          return link.data.time;
+        } else if (method === 'cheapest') {
+          return link.data.cost;
+        }
+      },
+    });
+  }
+
   /** Holds the path found by the pathfinder. */
   const foundPath = pathFinder.find(from, to).reverse();
 
@@ -58,7 +64,7 @@ function travelToFrom(from, to, method) {
       let minValue;
       if (method === 'fastest') {
         minValue = Math.min(pathArray[k][2].time, pathArray[k + 1][2].time);
-      } else if (method === 'cheapest' || method === null) {
+      } else if (method === 'cheapest' || method === null || method === 'simplest') {
         minValue = Math.min(pathArray[k][2].cost, pathArray[k + 1][2].cost);
       }
 
