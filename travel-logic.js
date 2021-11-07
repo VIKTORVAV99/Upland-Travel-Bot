@@ -25,10 +25,12 @@ function travelToFrom(from, to, method) {
   /** Holds the path found by the pathfinder. */
   const foundPath = pathFinder.find(from, to).reverse();
 
+  /** @type {string} */
   let nextNode = '';
+  /** @type {string} */
   let previousNode = '';
 
-  /** Holds the unfiltered path as an array */
+  /** Holds the unfiltered path as an array @type {array} */
   const pathArray = [];
   foundPath.forEach((Node) => {
     nextNode = Node.id;
@@ -40,10 +42,12 @@ function travelToFrom(from, to, method) {
     });
     previousNode = Node.id;
   });
-  /** Holds the filtered path as an array. */
+  /** Holds the filtered path as an array.
+   *  @type {array}
+   */
   const filteredPathArray = [];
 
-  /* Loops over the pathArray and check if the current paths to and from match the next paths to and from values.*/
+  /** Loops over the pathArray and check if the current paths to and from match the next paths to and from values. @type {number} */
   for (let k = 0; k < pathArray.length; k++) {
     if (
       k + 1 < pathArray.length &&
