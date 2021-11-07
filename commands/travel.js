@@ -10,7 +10,7 @@ const cities = [
   ['Cleveland', 'Cleveland'],
   ['Chicago', 'Chicago'],
   ['Kansas City', 'Kansas City'],
-  ['San Francisco', ' San Francisco'],
+  ['San Francisco', 'San Francisco'],
   ['Oakland', 'Oakland'],
   ['Bakersfield', 'Bakersfield'],
   ['Santa Clara', 'Santa Clara'],
