@@ -20,7 +20,7 @@ const cities = [
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('travel')
-    .setDescription('Gives you the cheapest route from point A to point B')
+    .setDescription('Gives you the best route from point A to point B based on the selected method.')
     .addStringOption((option) =>
       option
         .setName('from')
