@@ -1,22 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { travelToFrom } = require('../travel-logic');
-const cities = [
-  ['Staten Island', 'Staten Island'],
-  ['Rutherford', 'Rutherford'],
-  ['Manhattan', 'Manhattan'],
-  ['Brooklyn', 'Brooklyn'],
-  ['Nashville', 'Nashville'],
-  ['New Orleans', 'New Orleans'],
-  ['Cleveland', 'Cleveland'],
-  ['Chicago', 'Chicago'],
-  ['Kansas City', 'Kansas City'],
-  ['San Francisco', 'San Francisco'],
-  ['Oakland', 'Oakland'],
-  ['Bakersfield', 'Bakersfield'],
-  ['Santa Clara', 'Santa Clara'],
-  ['Fresno', 'Fresno & Clovis'],
-  ['Clovis', 'Fresno & Clovis'],
-];
+const { cities } = require('../data/data.json');
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('travel')
