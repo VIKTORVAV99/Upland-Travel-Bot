@@ -10,7 +10,7 @@ Array.prototype.unique = function () {
  * @param {string} from Point A.
  * @param {string} to Point B.
  * @param {string} method The method to use when finding the path.
- * @returns {array}
+ * @returns {embedResponse}
  */
 function travelToFrom(from, to, method) {
   let pathFinder;
@@ -88,7 +88,31 @@ function travelToFrom(from, to, method) {
     }
   }
 
-  return filteredPathArray;
+  const embedResponse = {
+    color: 0x36c6ff,
+    title: `${from} to ${to}`,
+    description: `The best route from ${from} to ${to} using the ${method ?? 'simplest'} method.`,
+    fields: [
+      {
+        name: 'Route:',
+        value: `${filteredPathArray
+          .map((array, index) => [`${index + 1}. ${array[0]} \u279c (${array[2].type}) \u279c ${array[1]}`])
+          .join('\n')}`,
+        inline: false,
+      },
+      {
+        name: 'Total cost:',
+        value: `${filteredPathArray.map((array) => array[2].cost).reduce((a, b) => a + b, 0)} UPX`,
+        inline: true,
+      },
+      {
+        name: 'Total time:',
+        value: `${filteredPathArray.map((array) => array[2].time).reduce((a, b) => a + b, 0)} minutes`,
+        inline: true,
+      },
+    ],
+  };
+  return embedResponse;
 }
 module.exports = {
   travelToFrom,

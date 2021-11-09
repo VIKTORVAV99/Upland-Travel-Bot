@@ -31,23 +31,10 @@ module.exports = {
   async execute(interaction) {
     const from = interaction.options.getString('from');
     const to = interaction.options.getString('to');
-    let method = interaction.options.getString('method');
+    const method = interaction.options.getString('method');
 
     if (from != to) {
-      const responseArray = [];
-      const filteredPathArray = travelToFrom(from, to, method);
-      responseArray.push(`Using the ${(method ??= 'simplest')} method:\n`);
-      let i = 1;
-      let totalCost = 0;
-      let totalTime = 0;
-      filteredPathArray.forEach((Line) => {
-        responseArray.push(`${i}. ${Line[0]} => (${Line[2].type}) => ${Line[1]}\n`);
-        totalCost += Line[2].cost;
-        totalTime += Line[2].time;
-        i++;
-      });
-      responseArray.push(`   Total cost: ${totalCost} UPX\n   Total time: ${totalTime} minutes`);
-      await interaction.reply(responseArray.join(''));
+      await interaction.reply({ embeds: [travelToFrom(from, to, method)] });
     } else {
       await interaction.reply('You are already at the destination!');
     }
