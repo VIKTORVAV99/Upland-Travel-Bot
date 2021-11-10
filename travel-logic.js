@@ -1,6 +1,5 @@
 const { graph } = require('./travel-routes.js');
 const { nba } = require('ngraph.path');
-const { Embed } = require('@discordjs/builders');
 
 Array.prototype.unique = function () {
   return Array.from(new Set(this));
