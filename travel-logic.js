@@ -1,5 +1,6 @@
 const { graph } = require('./travel-routes.js');
 const { nba } = require('ngraph.path');
+const { Embed } = require('@discordjs/builders');
 
 Array.prototype.unique = function () {
   return Array.from(new Set(this));
@@ -10,7 +11,7 @@ Array.prototype.unique = function () {
  * @param {string} from Point A.
  * @param {string} to Point B.
  * @param {string} method The method to use when finding the path.
- * @returns {embedResponse}
+ * @returns {object}
  */
 function travelToFrom(from, to, method) {
   let pathFinder;
@@ -19,11 +20,7 @@ function travelToFrom(from, to, method) {
   } else {
     pathFinder = nba(graph, {
       distance(_fromNode, _toNode, link) {
-        if (method === 'fastest') {
-          return link.data.time;
-        } else if (method === 'cheapest') {
-          return link.data.cost;
-        }
+        return method === 'fastest' ? link.data.time : link.data.cost;
       },
     });
   }
@@ -31,9 +28,9 @@ function travelToFrom(from, to, method) {
   /** Holds the path found by the pathfinder. */
   const foundPath = pathFinder.find(from, to).reverse();
 
-  /** @type {string} */
+  /** @type {string|number} */
   let nextNode = '';
-  /** @type {string} */
+  /** @type {string|number} */
   let previousNode = '';
 
   /** Holds the unfiltered path as an array @type {array} */
@@ -61,28 +58,20 @@ function travelToFrom(from, to, method) {
       pathArray[k][1] == pathArray[k + 1][1]
     ) {
       /** The minimum value for either time or cost. */
-      let minValue;
-      if (method === 'fastest') {
-        minValue = Math.min(pathArray[k][2].time, pathArray[k + 1][2].time);
-      } else if (method === 'cheapest' || method === null || method === 'simplest') {
-        minValue = Math.min(pathArray[k][2].cost, pathArray[k + 1][2].cost);
-      }
+      const minValue =
+        method === 'fastest'
+          ? Math.min(pathArray[k][2].time, pathArray[k + 1][2].time)
+          : Math.min(pathArray[k][2].cost, pathArray[k + 1][2].cost);
 
       for (let o = 0; o < 2; o++) {
-        if (method === 'fastest') {
-          if (pathArray[k + o][2].time == minValue) {
-            filteredPathArray.push(pathArray[k + o]);
-          }
-        } else if (method === 'cheapest' || method === null) {
-          if (pathArray[k + o][2].cost == minValue) {
-            filteredPathArray.push(pathArray[k + o]);
-          }
+        if (method === 'fastest' && pathArray[k + o][2].time === minValue) {
+          filteredPathArray.push(pathArray[k + o]);
+        } else if (pathArray[k + o][2].cost === minValue) {
+          filteredPathArray.push(pathArray[k + o]);
         }
       }
-    } else if (k > 0) {
-      if (pathArray[k - 1][0] != pathArray[k][0] && pathArray[k - 1][1] != pathArray[k][1]) {
-        filteredPathArray.push(pathArray[k]);
-      }
+    } else if (k > 0 && pathArray[k - 1][0] != pathArray[k][0] && pathArray[k - 1][1] != pathArray[k][1]) {
+      filteredPathArray.push(pathArray[k]);
     } else if (k == 0) {
       filteredPathArray.push(pathArray[k]);
     }
@@ -91,14 +80,13 @@ function travelToFrom(from, to, method) {
   const embedResponse = {
     color: 0x36c6ff,
     title: `${from} to ${to}`,
-    description: `The best route from ${from} to ${to} using the ${method ?? 'simplest'} method.`,
+    description: `The ${method ?? 'simplest'} route from ${from} to ${to}.`,
     fields: [
       {
         name: 'Route:',
         value: `${filteredPathArray
           .map((array, index) => [`${index + 1}. ${array[0]} \u279c (${array[2].type}) \u279c ${array[1]}`])
           .join('\n')}`,
-        inline: false,
       },
       {
         name: 'Total cost:',
@@ -114,6 +102,8 @@ function travelToFrom(from, to, method) {
   };
   return embedResponse;
 }
+
+console.log(travelToFrom('Bakersfield', 'Staten Island', null));
 module.exports = {
   travelToFrom,
 };
