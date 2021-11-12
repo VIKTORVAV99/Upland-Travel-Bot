@@ -102,7 +102,6 @@ function travelToFrom(from, to, method) {
   return embedResponse;
 }
 
-console.log(travelToFrom('Bakersfield', 'Staten Island', null));
 module.exports = {
   travelToFrom,
 };
