@@ -43,31 +43,36 @@ function travelToFrom(from, to, method) {
   const filteredPathArray = [];
 
   /** Loops over the pathArray and check if the current paths to and from match the next paths to and from values. @type {number} */
-  for (let k = 0; k < pathArray.length; k++) {
+  pathArray.forEach((Value, Index, Array) => {
     if (
-      k + 1 < pathArray.length &&
-      pathArray[k][0] == pathArray[k + 1][0] &&
-      pathArray[k][1] == pathArray[k + 1][1]
+      Index + 1 < Array.length &&
+      Array[Index][0] === Array[Index + 1][0] &&
+      Array[Index][1] === Array[Index + 1][1]
     ) {
       /** The minimum value for either time or cost. */
       const minValue =
         method === 'fastest'
-          ? Math.min(pathArray[k][2].time, pathArray[k + 1][2].time)
-          : Math.min(pathArray[k][2].cost, pathArray[k + 1][2].cost);
+          ? Math.min(Array[Index][2].time, Array[Index + 1][2].time)
+          : Math.min(Array[Index][2].cost, Array[Index + 1][2].cost);
 
+      /** Loops over the two matching paths and returns either the fastest or the cheapest */
       for (let o = 0; o < 2; o++) {
-        if (method === 'fastest' && pathArray[k + o][2].time === minValue) {
-          filteredPathArray.push(pathArray[k + o]);
-        } else if (pathArray[k + o][2].cost === minValue) {
-          filteredPathArray.push(pathArray[k + o]);
+        if (method === 'fastest' && Array[Index + o][2].time === minValue) {
+          filteredPathArray.push(Array[Index + o]);
+        } else if (Array[Index + o][2].cost === minValue) {
+          filteredPathArray.push(Array[Index + o]);
         }
       }
-    } else if (k > 0 && pathArray[k - 1][0] != pathArray[k][0] && pathArray[k - 1][1] != pathArray[k][1]) {
-      filteredPathArray.push(pathArray[k]);
-    } else if (k == 0) {
-      filteredPathArray.push(pathArray[k]);
+    } else if (
+      Index > 0 &&
+      Array[Index - 1][0] !== Array[Index][0] &&
+      Array[Index - 1][1] != Array[Index][1]
+    ) {
+      filteredPathArray.push(Value);
+    } else if (Index === 0) {
+      filteredPathArray.push(Value);
     }
-  }
+  });
 
   const embedResponse = {
     color: 0x36c6ff,
@@ -77,17 +82,17 @@ function travelToFrom(from, to, method) {
       {
         name: 'Route:',
         value: `${filteredPathArray
-          .map((array, index) => [`${index + 1}. ${array[0]} \u279c (${array[2].type}) \u279c ${array[1]}`])
+          .map((Value, Index) => [`${Index + 1}. ${Value[0]} \u279c (${Value[2].type}) \u279c ${Value[1]}`])
           .join('\n')}`,
       },
       {
         name: 'Total cost:',
-        value: `${filteredPathArray.map((array) => array[2].cost).reduce((a, b) => a + b, 0)} UPX`,
+        value: `${filteredPathArray.map((Value) => Value[2].cost).reduce((a, b) => a + b, 0)} UPX`,
         inline: true,
       },
       {
         name: 'Total time:',
-        value: `${filteredPathArray.map((array) => array[2].time).reduce((a, b) => a + b, 0)} minutes`,
+        value: `${filteredPathArray.map((Value) => Value[2].time).reduce((a, b) => a + b, 0)} minutes`,
         inline: true,
       },
     ],
