@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { travelToFrom } = require('../travel-logic');
-const { cities } = require('../data/data.json');
+const { cities } = require('../data/cities.json');
 
 module.exports = {
   data: new SlashCommandBuilder()
