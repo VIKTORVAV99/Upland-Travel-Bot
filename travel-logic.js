@@ -27,23 +27,16 @@ function travelToFrom(from, to, method) {
   /** Holds the path found by the pathfinder. */
   const foundPath = pathFinder.find(from, to).reverse();
 
-  /** @type {string|number} */
-  let nextNode = '';
-  /** @type {string|number} */
-  let previousNode = '';
-
   /** Holds the unfiltered path as an array @type {array} */
   const pathArray = [];
-  foundPath.forEach((Node) => {
-    nextNode = Node.id;
-    const links = Node.links.unique();
-    links.unique().forEach((Link) => {
-      if (Link.toId == nextNode && (Link.fromId == previousNode || '')) {
+  foundPath.forEach((Node, Index, Array) => {
+    Node.links.unique().forEach((Link) => {
+      if (Link.fromId == Array[Index].id && Link.toId == Array[Index + 1]?.id) {
         pathArray.push([Link.fromId, Link.toId, Link.data]);
       }
     });
-    previousNode = Node.id;
   });
+
   /** Holds the filtered path as an array.
    *  @type {array}
    */
