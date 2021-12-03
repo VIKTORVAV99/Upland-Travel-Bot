@@ -1,5 +1,5 @@
-const { graph } = require('./travel-routes.js');
-const { nba } = require('ngraph.path');
+import { graph } from './travel-routes.js';
+import path from 'ngraph.path';
 
 Array.prototype.unique = function () {
   return Array.from(new Set(this));
@@ -12,12 +12,12 @@ Array.prototype.unique = function () {
  * @param {string} method The method to use when finding the path.
  * @returns {object}
  */
-function travelToFrom(from, to, method) {
+export function travelToFrom(from, to, method) {
   let pathFinder;
   if (method === 'simplest' || method === null) {
-    pathFinder = nba(graph);
+    pathFinder = path.nba(graph);
   } else {
-    pathFinder = nba(graph, {
+    pathFinder = path.nba(graph, {
       distance(_fromNode, _toNode, link) {
         return method === 'fastest' ? link.data.time : link.data.cost;
       },
@@ -99,7 +99,3 @@ function travelToFrom(from, to, method) {
   };
   return embedResponse;
 }
-
-module.exports = {
-  travelToFrom,
-};

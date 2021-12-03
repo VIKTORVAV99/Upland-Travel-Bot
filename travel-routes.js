@@ -1,5 +1,5 @@
-const createGraph = require('ngraph.graph');
-const graph = createGraph();
+import createGraph from 'ngraph.graph';
+export const graph = createGraph();
 
 // manhattan cluster
 graph.addLink('Staten Island', 'Brooklyn', { cost: 20, time: 12, type: 'bus' });
@@ -87,5 +87,3 @@ graph.addLink('New Orleans', 'Kansas City', { cost: 300, time: 114, type: 'train
 graph.addLink('Chicago', 'New Orleans', { cost: 320, time: 123, type: 'train' });
 graph.addLink('Nashville', 'Chicago', { cost: 170, time: 63.3, type: 'train' });
 graph.addLink('Nashville', 'New Orleans', { cost: 190, time: 70.9, type: 'train' });
-
-module.exports = { graph };

@@ -4,6 +4,7 @@
   "description": "Discord Bot for travel routes in Upland.",
   "author": "VIKTORVAV99",
   "license": "ISC",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "format": "prettier --write .",
