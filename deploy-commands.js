@@ -6,15 +6,25 @@ import config from './config.json';
 const commands = [];
 const commandFiles = readdirSync('./commands').filter((file) => file.endsWith('.js'));
 
-for (const file of commandFiles) {
-  import(`./commands/${file}`).then((command) => {
-    commands.push(command.data.toJSON());
-  });
+async function readCommandFiles() {
+  for (const file of commandFiles) {
+    commands.push(
+      await import(`./commands/${file}`).then((command) => {
+        console.log(`Added command: ${command.data.name}`);
+        return command.data.toJSON();
+      })
+    );
+  }
 }
 
-const rest = new REST({ version: '9' }).setToken(config.token);
+async function deployCommands() {
+  await readCommandFiles();
+  const rest = new REST({ version: '9' }).setToken(config.token);
+  console.log(`Registering ${commands.length} commands...`);
+  rest
+    .put(Routes.applicationCommands(config.clientId), { body: commands })
+    .then(() => console.log(`Successfully registered ${commands.length} application commands.`))
+    .catch(console.error);
+}
 
-rest
-  .put(Routes.applicationCommands(config.clientId), { body: commands })
-  .then(() => console.log('Successfully registered application commands.'))
-  .catch(console.error);
+deployCommands();
