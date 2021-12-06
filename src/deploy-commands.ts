@@ -3,7 +3,7 @@ import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import config from './config.json';
 
-const commands = [];
+const commands: unknown[] = []
 const commandFiles = readdirSync('./commands').filter((file) => file.endsWith('.js'));
 
 for (const file of commandFiles) {
