@@ -1,18 +1,16 @@
 import { graph } from './travel-routes.js';
 import path from 'ngraph.path';
-
-Array.prototype.unique = function () {
-  return Array.from(new Set(this));
-};
+import type { NodeId } from 'ngraph.graph';
+import type { Embed } from './interfaces/embed.js';
 
 /**
  * Gives the travel route from point A to point B.
- * @param {string} from Point A.
- * @param {string} to Point B.
- * @param {string} method The method to use when finding the path.
- * @returns {object}
+ * @param from Point A.
+ * @param to Point B.
+ * @param method The method to use when finding the path.
+ * @returns
  */
-export function travelToFrom(from, to, method) {
+export function travelToFrom(from: string, to: string, method: string | null): Embed {
   let pathFinder;
   if (method === 'simplest' || method === null) {
     pathFinder = path.nba(graph);
@@ -28,9 +26,9 @@ export function travelToFrom(from, to, method) {
   const foundPath = pathFinder.find(from, to).reverse();
 
   /** Holds the unfiltered path as an array @type {array} */
-  const pathArray = [];
+  const pathArray: [NodeId, NodeId, { time: number; cost: number; type: string }][] = [];
   foundPath.forEach((Node, Index, Array) => {
-    Node.links.unique().forEach((Link) => {
+    new Set(Node.links).forEach((Link) => {
       if (Link.fromId == Array[Index].id && Link.toId == Array[Index + 1]?.id) {
         pathArray.push([Link.fromId, Link.toId, Link.data]);
       }
@@ -40,7 +38,7 @@ export function travelToFrom(from, to, method) {
   /** Holds the filtered path as an array.
    *  @type {array}
    */
-  const filteredPathArray = [];
+  const filteredPathArray: [NodeId, NodeId, { time: number; cost: number; type: string }][] = [];
 
   /** Loops over the pathArray and check if the current paths to and from match the next paths to and from values. @type {number} */
   pathArray.forEach((Value, Index, Array) => {
@@ -74,7 +72,7 @@ export function travelToFrom(from, to, method) {
     }
   });
 
-  const embedResponse = {
+  const embedResponse: Embed = {
     color: 0x36c6ff,
     title: `${from} to ${to}`,
     description: `The ${method ?? 'simplest'} route from ${from} to ${to}.`,
@@ -99,3 +97,5 @@ export function travelToFrom(from, to, method) {
   };
   return embedResponse;
 }
+
+console.log(travelToFrom('Brooklyn', 'Bakersfield', null));

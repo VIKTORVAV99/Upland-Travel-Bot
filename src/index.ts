@@ -3,9 +3,10 @@ import { readdirSync } from 'fs';
 // Require the necessary discord.js classes
 import { Client, Collection, Intents } from 'discord.js';
 import config from './config.json';
+import { CustomClient } from './utils/customClient';
 
 // Create a new client instance
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client: CustomClient = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.commands = new Collection();
 
@@ -15,7 +16,7 @@ const commandFiles = readdirSync('./commands').filter((file) => file.endsWith('.
 // Loop over files in the commandFiles array
 for (const file of commandFiles) {
   import(`./commands/${file}`).then((command) => {
-    client.commands.set(command.data.name, command);
+    client.commands?.set(command.data.name, command);
   });
 }
 
