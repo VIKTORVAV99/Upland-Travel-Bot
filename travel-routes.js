@@ -10,6 +10,14 @@ graph.addLink('Brooklyn', 'Staten Island', { cost: 20, time: 12, type: 'bus' });
 graph.addLink('Manhattan', 'Brooklyn', { cost: 25, time: 4, type: 'train' });
 graph.addLink('Manhattan', 'Rutherford', { cost: 20, time: 7, type: 'train' });
 
+graph.addLink('Bronx', 'Manhattan', { cost: 10, time: 3, type: 'train' });
+graph.addLink('Bronx', 'Brooklyn', { cost: 10, time: 2, type: 'train' });
+graph.addLink('Bronx', 'Rutherford', { cost: 10, time: 2, type: 'train' });
+
+graph.addLink('Manhattan', 'Bronx', { cost: 10, time: 3, type: 'train' });
+graph.addLink('Brooklyn', 'Bronx', { cost: 10, time: 2, type: 'train' });
+graph.addLink('Rutherford', 'Bronx', { cost: 10, time: 2, type: 'train' });
+
 // san francisco cluster
 graph.addLink('Santa Clara', 'San Francisco', { cost: 35, time: 10, type: 'train' });
 graph.addLink('Bakersfield', 'San Francisco', { cost: 125, time: 39, type: 'train' });
