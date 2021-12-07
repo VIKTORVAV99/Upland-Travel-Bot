@@ -1,7 +1,7 @@
-import { CustomCommandInteraction } from "../utils/customCommandInteraction";
+import { CustomCommandInteraction } from '../utils/customCommandInteraction';
 
 export const name = 'interactionCreate';
-export async function execute(interaction:CustomCommandInteraction) {
+export async function execute(interaction: CustomCommandInteraction) {
   if (!interaction.isCommand()) {
     return;
   }

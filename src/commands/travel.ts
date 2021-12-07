@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { travelToFrom } from '../travel-logic.js';
 import { cities } from '../data/cities.js';
-import { CommandInteraction, CommandInteractionOption } from 'discord.js';
+import { CommandInteraction } from 'discord.js';
 
 export const data = new SlashCommandBuilder()
   .setName('travel')
