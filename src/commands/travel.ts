@@ -1,6 +1,7 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { travelToFrom } from '../travel-logic.js';
-import jsonData from '../data/cities.json';
+import { cities } from '../data/cities.js';
+import { CommandInteraction } from 'discord.js';
 
 export const data = new SlashCommandBuilder()
   .setName('travel')
@@ -10,14 +11,14 @@ export const data = new SlashCommandBuilder()
       .setName('from')
       .setDescription('Enter the destination you are traveling from.')
       .setRequired(true)
-      .addChoices(jsonData.cities.sort())
+      .addChoices(cities.sort())
   )
   .addStringOption((option) =>
     option
       .setName('to')
       .setDescription('Enter the destination you are traveling to.')
       .setRequired(true)
-      .addChoices(jsonData.cities.sort())
+      .addChoices(cities.sort())
   )
   .addStringOption((option) =>
     option
@@ -27,9 +28,9 @@ export const data = new SlashCommandBuilder()
       .addChoice('fastest', 'fastest')
       .addChoice('simplest', 'simplest')
   );
-export async function execute(interaction) {
-  const from = interaction.options.getString('from');
-  const to = interaction.options.getString('to');
+export async function execute(interaction: CommandInteraction) {
+  const from = interaction.options.getString('from') ?? '';
+  const to = interaction.options.getString('to') ?? '';
   const method = interaction.options.getString('method');
 
   if (from != to) {

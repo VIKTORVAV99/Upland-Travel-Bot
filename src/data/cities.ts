@@ -1,0 +1,18 @@
+export const cities: [name: string, value: string][] = [
+  ['Staten Island', 'Staten Island'],
+  ['Rutherford', 'Rutherford'],
+  ['Manhattan', 'Manhattan'],
+  ['Brooklyn', 'Brooklyn'],
+  ['Nashville', 'Nashville'],
+  ['New Orleans', 'New Orleans'],
+  ['Cleveland', 'Cleveland'],
+  ['Chicago', 'Chicago'],
+  ['Kansas City', 'Kansas City'],
+  ['San Francisco', 'San Francisco'],
+  ['Oakland', 'Oakland'],
+  ['Bakersfield', 'Bakersfield'],
+  ['Santa Clara', 'Santa Clara'],
+  ['Fresno', 'Fresno & Clovis'],
+  ['Clovis', 'Fresno & Clovis'],
+  ['Bronx', 'Bronx'],
+];
