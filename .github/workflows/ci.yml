@@ -82,3 +82,9 @@ jobs:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-node-
+      - name: NPM Install
+        run: npm ci
+      - name: Compile TypeScript
+        run: npm run build
+        env:
+          CI: 'true'
