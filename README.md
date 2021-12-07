@@ -1,6 +1,6 @@
 # Upland Travel Bot
 
-![Dependabot](https://badgen.net/badge/icon/Dependabot?icon=dependabot&label) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![CodeFactor](https://www.codefactor.io/repository/github/viktorvav99/upland-travel-bot/badge)](https://www.codefactor.io/repository/github/viktorvav99/upland-travel-bot)
+![Dependabot](https://badgen.net/badge/icon/Dependabot?icon=dependabot&label) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![CodeFactor](https://www.codefactor.io/repository/github/viktorvav99/upland-travel-bot/badge)](https://www.codefactor.io/repository/github/viktorvav99/upland-travel-bot) [![CI](https://github.com/VIKTORVAV99/Upland-Travel-Bot/actions/workflows/ci.yml/badge.svg)](https://github.com/VIKTORVAV99/Upland-Travel-Bot/actions/workflows/ci.yml)
 
 ## Description
 
