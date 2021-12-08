@@ -8,7 +8,6 @@ import type { Embed } from './interfaces/embed.js';
  * @param from Point A.
  * @param to Point B.
  * @param method The method to use when finding the path.
- * @returns
  */
 export function travelToFrom(from: string, to: string, method: string | null): Embed {
   let pathFinder;
@@ -29,7 +28,7 @@ export function travelToFrom(from: string, to: string, method: string | null): E
   const pathArray: [NodeId, NodeId, { time: number; cost: number; type: string }][] = [];
   foundPath.forEach((Node, Index, Array) => {
     new Set(Node.links).forEach((Link) => {
-      if (Link.fromId == Array[Index].id && Link.toId == Array[Index + 1]?.id) {
+      if (Link.fromId === Array[Index].id && Link.toId === Array[Index + 1]?.id) {
         pathArray.push([Link.fromId, Link.toId, Link.data]);
       }
     });
@@ -64,7 +63,7 @@ export function travelToFrom(from: string, to: string, method: string | null): E
     } else if (
       Index > 0 &&
       Array[Index - 1][0] !== Array[Index][0] &&
-      Array[Index - 1][1] != Array[Index][1]
+      Array[Index - 1][1] !== Array[Index][1]
     ) {
       filteredPathArray.push(Value);
     } else if (Index === 0) {
@@ -97,5 +96,3 @@ export function travelToFrom(from: string, to: string, method: string | null): E
   };
   return embedResponse;
 }
-
-console.log(travelToFrom('Brooklyn', 'Bakersfield', null));
