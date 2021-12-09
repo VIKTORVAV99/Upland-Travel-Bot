@@ -8,7 +8,7 @@
   "main": "dist/index.js",
   "scripts": {
     "deploy": "node --experimental-json-modules deploy-commands.js",
-    "setup": "git pull && install",
+    "setup": "git pull && npm install",
     "build": "tsc",
     "format": "prettier --write .",
     "lint": "eslint ."
