@@ -1,7 +1,7 @@
 import { graph } from './travel-routes.js';
 import path from 'ngraph.path';
 import type { NodeId } from 'ngraph.graph';
-import type { Embed } from './interfaces/embed.js';
+import type { MessageEmbedOptions } from 'discord.js';
 
 /**
  * Gives the travel route from point A to point B.
@@ -9,7 +9,7 @@ import type { Embed } from './interfaces/embed.js';
  * @param to Point B.
  * @param method The method to use when finding the path.
  */
-export function travelToFrom(from: string, to: string, method: string | null): Embed {
+export function travelToFrom(from: string, to: string, method: string | null): MessageEmbedOptions {
   let pathFinder;
   if (method === 'simplest' || method === null) {
     pathFinder = path.nba(graph);
@@ -71,7 +71,7 @@ export function travelToFrom(from: string, to: string, method: string | null): E
     }
   });
 
-  const embedResponse: Embed = {
+  const embedResponse: MessageEmbedOptions = {
     color: 0x36c6ff,
     title: `${from} to ${to}`,
     description: `The ${method ?? 'simplest'} route from ${from} to ${to}.`,
