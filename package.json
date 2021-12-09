@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "description": "Discord Bot for travel routes in Upland.",
   "author": "VIKTORVAV99",
-  "license": "ISC",
+  "license": "MIT",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
