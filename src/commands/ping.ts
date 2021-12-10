@@ -1,10 +1,9 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { CommandInteraction } from 'discord.js';
-import { Embed } from '../interfaces/embed.js';
+import { CommandInteraction, MessageEmbedOptions } from 'discord.js';
 
 export const data = new SlashCommandBuilder().setName('ping').setDescription('Check the latency of the bot');
 export async function execute(interaction: CommandInteraction) {
-  const embedResponse: Embed = {
+  const embedResponse: MessageEmbedOptions = {
     title: 'Pong!',
     fields: [
       { name: 'Bot latency', value: `${Date.now() - interaction.createdTimestamp} ms`, inline: true },
