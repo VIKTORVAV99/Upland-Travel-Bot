@@ -39,3 +39,9 @@ export async function execute(interaction: CommandInteraction) {
     await interaction.reply('You are already at the destination!');
   }
 }
+export const helpDescription =
+  'Command to get the best route to travel in Upland based on the selected method.' +
+  '\nOptions:' +
+  '\n- `from` - The city you are traveling from.' +
+  '\n- `to` - The city you are traveling to.' +
+  '\n- `method` - The method to calculate the best route, takes the options: `simplest`, `fastest` and `cheapest`. Default is `simplest`.';

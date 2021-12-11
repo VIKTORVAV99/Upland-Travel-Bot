@@ -12,3 +12,4 @@ export async function execute(interaction: CommandInteraction) {
   };
   await interaction.reply({ embeds: [embedResponse] });
 }
+export const helpDescription = 'Command to test the latency of the bot and the Discord API.';
