@@ -20,10 +20,6 @@ try {
   console.log(error);
 }
 
-async function getCommandHelpArray() {
-  return commandHelpArray;
-}
-
 export const data = new SlashCommandBuilder()
   .setName('help')
   .setDescription('Get help about the bots commands.');
@@ -32,8 +28,7 @@ export async function execute(interaction: CommandInteraction) {
   const embedResponse: MessageEmbedOptions = {
     title: 'Help',
     description: 'Information about the different commands.',
-    fields: await getCommandHelpArray(),
+    fields: commandHelpArray,
   };
-
   await interaction.reply({ embeds: [embedResponse], ephemeral: true });
 }
