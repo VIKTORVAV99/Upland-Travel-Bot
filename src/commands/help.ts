@@ -35,5 +35,5 @@ export async function execute(interaction: CommandInteraction) {
     fields: await getCommandHelpArray(),
   };
 
-  await interaction.reply({ embeds: [embedResponse] });
+  await interaction.reply({ embeds: [embedResponse], ephemeral: true });
 }
