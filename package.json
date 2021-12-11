@@ -7,11 +7,12 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "deploy": "node --experimental-json-modules deploy-commands.js",
+    "deploy": "node --experimental-json-modules dist/deploy-commands.js",
     "setup": "git pull && npm install",
     "build": "tsc",
     "format": "prettier --write .",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "run": "node --experimental-json-modules ."
   },
   "dependencies": {
     "@discordjs/builders": "^0.9.0",
