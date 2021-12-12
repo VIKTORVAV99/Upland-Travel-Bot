@@ -29,11 +29,11 @@ export const data = new SlashCommandBuilder()
       .addChoice('simplest', 'simplest')
   );
 export async function execute(interaction: CommandInteraction) {
-  const from = interaction.options.getString('from') ?? '';
-  const to = interaction.options.getString('to') ?? '';
+  const from = interaction.options.getString('from', true);
+  const to = interaction.options.getString('to', true);
   const method = interaction.options.getString('method');
 
-  if (from != to) {
+  if (from !== to) {
     await interaction.reply({ embeds: [travelToFrom(from, to, method)] });
   } else {
     await interaction.reply('You are already at the destination!');
