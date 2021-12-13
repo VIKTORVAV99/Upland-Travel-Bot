@@ -4,11 +4,13 @@ on:
   push:
     paths-ignore:
       - '*.md'
-    branches: [$default-branch]
+    branches:
+      - 'master'
   pull_request:
     paths-ignore:
       - '*.md'
-    branches: [$default-branch]
+    branches:
+      - 'master'
   workflow_dispatch:
 
 jobs:
