@@ -21,12 +21,10 @@ jobs:
         uses: actions/checkout@v2.4.0
       - name: Setup Node 16
         uses: actions/setup-node@v2.5.0
-        id: setup
         with:
           node-version: 16
           cache: 'npm'
       - name: NPM Install
-        if: steps.setup.outputs.cache-hit != 'true'
         run: npm ci
       - name: Lint files
         run: npm run lint
@@ -59,12 +57,10 @@ jobs:
         uses: actions/checkout@v2.4.0
       - name: Setup Node 16
         uses: actions/setup-node@v2.5.0
-        id: setup
         with:
           node-version: 16
           cache: 'npm'
       - name: NPM Install
-        if: steps.setup.outputs.cache-hit != 'true'
         run: npm ci
       - name: Create config file
         run: |
