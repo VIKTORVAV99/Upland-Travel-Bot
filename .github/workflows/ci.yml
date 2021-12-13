@@ -24,8 +24,9 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
+        id: setup
       - name: NPM Install
-        if: steps.compile.outputs.cache-hit != true
+        if: steps.setup.outputs.cache-hit != true
         run: npm ci
       - name: Lint files
         run: npm run lint
@@ -61,8 +62,9 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
+        id: setup
       - name: NPM Install
-        if: steps.compile.outputs.cache-hit != true
+        if: steps.setup.outputs.cache-hit != true
         run: npm ci
       - name: Create config file
         run: |
