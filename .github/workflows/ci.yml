@@ -4,15 +4,11 @@ on:
   push:
     paths-ignore:
       - '*.md'
-    branches:
-      - 'master'
-      - 'dev'
+    branches: [$default-branch]
   pull_request:
     paths-ignore:
       - '*.md'
-    branches:
-      - 'master'
-      - 'dev'
+    branches: [$default-branch]
   workflow_dispatch:
 
 jobs:
@@ -27,14 +23,9 @@ jobs:
         uses: actions/setup-node@v2.5.0
         with:
           node-version: 16
-      - name: Restore npm cache
-        uses: actions/cache@v2.1.7
-        id: npm-cache
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
-      - name: Install dev dependencies
+          cache: 'npm'
+      - name: NPM Install
+        if: steps.compile.outputs.cache-hit != 'true'
         run: npm ci
       - name: Lint files
         run: npm run lint
@@ -52,13 +43,7 @@ jobs:
         uses: actions/setup-node@v2.5.0
         with:
           node-version: 16
-      - name: Restore npm cache
-        uses: actions/cache@v2.1.7
-        id: npm-cache
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
+          cache: 'npm'
       - name: Prettier
         run: npx prettier --check .
         env:
@@ -75,14 +60,9 @@ jobs:
         uses: actions/setup-node@v2.5.0
         with:
           node-version: 16
-      - name: Restore npm cache
-        uses: actions/cache@v2.1.7
-        id: npm-cache
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
+          cache: 'npm'
       - name: NPM Install
+        if: steps.compile.outputs.cache-hit != 'true'
         run: npm ci
       - name: Create config file
         run: |
