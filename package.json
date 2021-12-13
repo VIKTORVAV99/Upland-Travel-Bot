@@ -7,12 +7,17 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "deploy": "node --experimental-json-modules dist/deploy-commands.js",
+    "format:check": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "check": "npm run format:check && npm run lint:check",
+    "fix": "npm run format:fix && npm run lint:fix",
+    "deploy-commands": "node --experimental-json-modules dist/deploy-commands.js",
     "setup": "git pull && npm install",
     "build": "tsc",
-    "format": "prettier --write .",
-    "lint": "eslint .",
-    "run": "node --experimental-json-modules ."
+    "run": "node --experimental-json-modules .",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@discordjs/builders": "^0.9.0",
@@ -27,6 +32,7 @@
     "@typescript-eslint/parser": "^5.6.0",
     "eslint": "^8.4.1",
     "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.4",
     "prettier": "^2.5.1",
     "typescript": "^4.5.3"
   }
