@@ -17,9 +17,13 @@ const commandFiles = readdirSync('dist/commands').filter((file) => file.endsWith
 
 // Loop over files in the commandFiles array
 for (const file of commandFiles) {
-  import(`./commands/${file}`).then((command: Command) => {
-    client.commands?.set(command.data.name, command);
-  });
+  import(`./commands/${file}`)
+    .then((command: Command) => {
+      client.commands?.set(command.data.name, command);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 // Puts the files in the events directory that ends with .js in a eventGiles array
@@ -27,11 +31,15 @@ const eventFiles = readdirSync('dist/events').filter((file) => file.endsWith('.j
 
 // Loop over files in the eventFiles array
 for (const file of eventFiles) {
-  import(`./events/${file}`).then((event) => {
-    event.once
-      ? client.once(event.name, (args) => event.execute(args))
-      : client.on(event.name, (args) => event.execute(args));
-  });
+  import(`./events/${file}`)
+    .then((event) => {
+      event.once
+        ? client.once(event.name, (args) => event.execute(args))
+        : client.on(event.name, (args) => event.execute(args));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 // Login to Discord with your client's token
