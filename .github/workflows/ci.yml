@@ -54,6 +54,8 @@ jobs:
     name: Compile TypeScript
     needs: [lint, prettier]
     runs-on: ubuntu-latest
+    env:
+      DISCORD_TOKEN: 'fake discord token'
     steps:
       - name: Checkout
         uses: actions/checkout@v2.4.0
@@ -64,12 +66,6 @@ jobs:
           cache: 'npm'
       - name: NPM Install
         run: npm ci
-      - name: Create config file
-        run: |
-          touch src/config.json
-          cat > src/config.json << EOF
-          ${{ secrets.JSON_CONFIG }}
-          EOF
       - name: Compile TypeScript
         run: npm run build
         env:

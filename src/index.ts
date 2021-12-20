@@ -1,8 +1,8 @@
 #!/usr/bin/env node
+import 'dotenv/config';
 import { readdirSync } from 'fs';
 // Require the necessary discord.js classes
 import { Client, Collection, Intents } from 'discord.js';
-import config from './config.json';
 // Types
 import type { CustomClient } from './utils/customClient';
 import type { Command } from './interfaces/command';
@@ -35,4 +35,4 @@ for (const file of eventFiles) {
 }
 
 // Login to Discord with your client's token
-client.login(config.token);
+client.login(process.env.DISCORD_TOKEN);

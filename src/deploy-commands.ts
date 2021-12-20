@@ -1,7 +1,6 @@
 import { readdirSync } from 'fs';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
-import config from './config.json';
 import { Command } from './interfaces/command';
 
 const commands: unknown[] = [];
@@ -20,10 +19,10 @@ async function readCommandFiles() {
 
 async function deployCommands() {
   await readCommandFiles();
-  const rest = new REST({ version: '9' }).setToken(config.token);
+  const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN ?? '');
   console.log(`Registering ${commands.length} commands...`);
   rest
-    .put(Routes.applicationCommands(config.clientId), { body: commands })
+    .put(Routes.applicationCommands(process.env.CLIENT_ID ?? ''), { body: commands })
     .then(() => console.log(`Successfully registered ${commands.length} application commands.`))
     .catch(console.error);
 }
