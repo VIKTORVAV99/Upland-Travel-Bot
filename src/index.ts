@@ -6,6 +6,7 @@ import { Client, Collection, Intents } from 'discord.js';
 // Types
 import type { CustomClient } from './utils/customClient';
 import type { Command } from './interfaces/command';
+import type { Event } from './interfaces/event';
 
 // Create a new client instance
 const client: CustomClient = new Client({ intents: [Intents.FLAGS.GUILDS] });
@@ -32,10 +33,10 @@ const eventFiles = readdirSync('dist/events').filter((file) => file.endsWith('.j
 // Loop over files in the eventFiles array
 for (const file of eventFiles) {
   import(`./events/${file}`)
-    .then((event) => {
+    .then((event: Event) => {
       event.once
-        ? client.once(event.name, (args) => event.execute(args))
-        : client.on(event.name, (args) => event.execute(args));
+        ? client.once(event.name, (client: Client) => event.execute(client))
+        : client.on(event.name, (client: Client) => event.execute(client));
     })
     .catch((error) => {
       console.log(error);
