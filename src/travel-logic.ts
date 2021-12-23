@@ -111,5 +111,3 @@ export function travelToFrom(from: string, to: string, method: string | null): M
   };
   return embedResponse;
 }
-
-console.log(travelToFrom('Cleveland', 'Bakersfield', 'fastest'));
