@@ -9,19 +9,17 @@ export const data = new SlashCommandBuilder()
 
 /** The main function that executes the command. */
 export async function execute(interaction: CommandInteraction) {
+  const amountOfServers = interaction.client.guilds.cache.size;
   const uptime = convertMs(interaction.client.uptime ?? 0);
-  const readyAt = interaction.client.readyAt;
+  const readyAt = interaction.client.readyAt?.toUTCString();
+  const createdAt = interaction.createdAt.toUTCString();
   const embedResponse: MessageEmbedOptions = {
     title: 'Bot Status',
     description: 'Basic status information about the bot.',
     fields: [
       {
         name: 'Servers',
-        value: `The bot is in ${interaction.client.guilds.cache.size} ${plural(
-          interaction.client.guilds.cache.size,
-          'server',
-          'servers'
-        )}.`,
+        value: `The bot is in ${amountOfServers} ${plural(amountOfServers, 'server', 'servers')}.`,
       },
       {
         name: 'Uptime',
@@ -40,9 +38,9 @@ export async function execute(interaction: CommandInteraction) {
         )} and ${uptime.seconds.toString()} ${plural(uptime.seconds, 'second', 'seconds')}.`,
         inline: true,
       },
-      { name: 'Ready at', value: `${readyAt?.toUTCString()}`, inline: true },
+      { name: 'Ready at', value: `${readyAt}`, inline: true },
     ],
-    footer: { text: `Requested: ${interaction.createdAt.toUTCString()}` },
+    footer: { text: `Requested: ${createdAt}` },
   };
   await interaction.reply({ embeds: [embedResponse] });
 }
