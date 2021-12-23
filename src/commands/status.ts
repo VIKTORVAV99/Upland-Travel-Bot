@@ -11,15 +11,15 @@ export const data = new SlashCommandBuilder()
 export async function execute(interaction: CommandInteraction) {
   const amountOfServers = interaction.client.guilds.cache.size;
   const uptime = convertMs(interaction.client.uptime ?? 0);
-  const readyAt = interaction.client.readyAt?.toUTCString();
-  const createdAt = interaction.createdAt.toUTCString();
+  const readyAt: string = interaction.client.readyAt?.toUTCString() ?? 'Error';
+  const createdAt: string = interaction.createdAt.toUTCString();
   const embedResponse: MessageEmbedOptions = {
     title: 'Bot Status',
     description: 'Basic status information about the bot.',
     fields: [
       {
         name: 'Servers',
-        value: `The bot is in ${amountOfServers} ${plural(amountOfServers, 'server', 'servers')}.`,
+        value: `The bot is in ${amountOfServers.toString()} ${plural(amountOfServers, 'server', 'servers')}.`,
       },
       {
         name: 'Uptime',
