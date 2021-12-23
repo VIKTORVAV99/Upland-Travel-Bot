@@ -1,0 +1,275 @@
+[
+  {
+    "from": "Manhattan",
+    "to": "Brooklyn",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 25,
+        "time": 25
+      }
+    ]
+  },
+  {
+    "from": "Manhattan",
+    "to": "Rutherford",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 20,
+        "time": 7
+      }
+    ]
+  },
+  {
+    "from": "Manhattan",
+    "to": "Bronx",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 10,
+        "time": 3
+      }
+    ]
+  },
+  {
+    "from": "Brooklyn",
+    "to": "Staten Island",
+    "modes": [
+      {
+        "type": "bus",
+        "cost": 20,
+        "time": 12
+      }
+    ]
+  },
+  {
+    "from": "Brooklyn",
+    "to": "Bronx",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 10,
+        "time": 2
+      }
+    ]
+  },
+  {
+    "from": "Rutherford",
+    "to": "Bronx",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 10,
+        "time": 2
+      }
+    ]
+  },
+  {
+    "from": "Manhattan",
+    "to": "Chicago",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 740,
+        "time": 14
+      }
+    ]
+  },
+  {
+    "from": "Manhattan",
+    "to": "Kansas City",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 1120,
+        "time": 19
+      }
+    ]
+  },
+  {
+    "from": "Manhattan",
+    "to": "Nashville",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 770,
+        "time": 12.8
+      }
+    ]
+  },
+  {
+    "from": "Manhattan",
+    "to": "New Orleans",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 1180,
+        "time": 20
+      }
+    ]
+  },
+  {
+    "from": "Manhattan",
+    "to": "San Francisco",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 2580,
+        "time": 45
+      }
+    ]
+  },
+  {
+    "from": "Chicago",
+    "to": "Cleveland",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 150,
+        "time": 50
+      },
+      {
+        "type": "hyperloop",
+        "cost": 375,
+        "time": 6
+      }
+    ]
+  },
+  {
+    "from": "Chicago",
+    "to": "Kansas City",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 170,
+        "time": 58
+      },
+      {
+        "type": "plane",
+        "cost": 400,
+        "time": 7
+      }
+    ]
+  },
+  {
+    "from": "Chicago",
+    "to": "Nashville",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 170,
+        "time": 63.3
+      },
+      {
+        "type": "plane",
+        "cost": 410,
+        "time": 14
+      }
+    ]
+  },
+  {
+    "from": "Chicago",
+    "to": "New Orleans",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 320,
+        "time": 123
+      },
+      {
+        "type": "plane",
+        "cost": 840,
+        "time": 14
+      }
+    ]
+  },
+  {
+    "from": "Chicago",
+    "to": "San Francisco",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 1840,
+        "time": 32
+      }
+    ]
+  },
+  {
+    "from": "San Francisco",
+    "to": "Bakersfield",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 125,
+        "time": 39
+      }
+    ]
+  },
+  {
+    "from": "San Francisco",
+    "to": "Santa Clara",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 35,
+        "time": 10
+      }
+    ]
+  },
+  {
+    "from": "San Francisco",
+    "to": "Fresno & Clovis",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 95,
+        "time": 25
+      }
+    ]
+  },
+  {
+    "from": "San Francisco",
+    "to": "Oakland",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 25,
+        "time": 6
+      }
+    ]
+  },
+  {
+    "from": "Bakersfield",
+    "to": "Fresno & Clovis",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 40,
+        "time": 13
+      }
+    ]
+  },
+  {
+    "from": "San Francisco",
+    "to": "Kansas City",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 1500,
+        "time": 25
+      }
+    ]
+  },
+  {
+    "from": "San Francisco",
+    "to": "New Orleans",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 1910,
+        "time": 32
+      }
+    ]
+  }
+]
