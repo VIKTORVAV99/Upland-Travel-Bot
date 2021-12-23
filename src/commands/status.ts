@@ -9,7 +9,7 @@ export const data = new SlashCommandBuilder()
 
 /** The main function that executes the command. */
 export async function execute(interaction: CommandInteraction) {
-  const amountOfServers = interaction.client.guilds.cache.size;
+  const amountOfServers = interaction.client.guilds.cache.size.toString();
   const uptime = convertMs(interaction.client.uptime ?? 0);
   const readyAt: string = interaction.client.readyAt?.toUTCString() ?? 'Error';
   const createdAt: string = interaction.createdAt.toUTCString();
@@ -19,7 +19,11 @@ export async function execute(interaction: CommandInteraction) {
     fields: [
       {
         name: 'Servers',
-        value: `The bot is in ${amountOfServers.toString()} ${plural(amountOfServers, 'server', 'servers')}.`,
+        value: `The bot is in ${amountOfServers} ${plural(
+          interaction.client.guilds.cache.size,
+          'server',
+          'servers'
+        )}.`,
       },
       {
         name: 'Uptime',
