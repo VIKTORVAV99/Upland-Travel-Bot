@@ -9,7 +9,7 @@ export const data = new SlashCommandBuilder()
 
 /** The main function that executes the command. */
 export async function execute(interaction: CommandInteraction) {
-  const amountOfServers = interaction.client.guilds.cache.size.toString();
+  const amountOfServers: string = interaction.client.guilds.cache.size.toString();
   const uptime = convertMs(interaction.client.uptime ?? 0);
   const readyAt: string = interaction.client.readyAt?.toUTCString() ?? 'Error';
   const createdAt: string = interaction.createdAt.toUTCString();
