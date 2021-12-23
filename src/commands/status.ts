@@ -6,6 +6,8 @@ import { plural } from '../utils/plural.js';
 export const data = new SlashCommandBuilder()
   .setName('status')
   .setDescription('Gives the status information about the bot.');
+
+/** The main function that executes the command. */
 export async function execute(interaction: CommandInteraction) {
   const uptime = convertMs(interaction.client.uptime ?? 0);
   const readyAt = interaction.client.readyAt;
@@ -17,18 +19,25 @@ export async function execute(interaction: CommandInteraction) {
         name: 'Servers',
         value: `The bot is in ${interaction.client.guilds.cache.size} ${plural(
           interaction.client.guilds.cache.size,
-          'server'
+          'server',
+          'servers'
         )}.`,
       },
       {
         name: 'Uptime',
-        value: `${uptime.days} ${plural(uptime.days, 'day')}, ${uptime.hours} ${plural(
+        value: `${uptime.days.toString()} ${plural(
+          uptime.days,
+          'day',
+          'days'
+        )}, ${uptime.hours.toString()} ${plural(
           uptime.hours,
-          'hour'
-        )}, ${uptime.minutes} ${plural(uptime.minutes, 'minute')} and ${uptime.seconds} ${plural(
-          uptime.seconds,
-          'second'
-        )}.`,
+          'hour',
+          'hours'
+        )}, ${uptime.minutes.toString()} ${plural(
+          uptime.minutes,
+          'minute',
+          'minutes'
+        )} and ${uptime.seconds.toString()} ${plural(uptime.seconds, 'second', 'seconds')}.`,
         inline: true,
       },
       { name: 'Ready at', value: `${readyAt?.toUTCString()}`, inline: true },

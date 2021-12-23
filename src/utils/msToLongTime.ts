@@ -1,3 +1,8 @@
+/**
+ * A utility function to convert milliseconds to the amount of days, hours, minutes and seconds and returns them.
+ * @param milliseconds
+ * @returns
+ */
 export function convertMs(milliseconds: number): {
   days: number;
   hours: number;
