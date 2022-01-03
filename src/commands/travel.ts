@@ -28,6 +28,8 @@ export const data = new SlashCommandBuilder()
       .addChoice('fastest', 'fastest')
       .addChoice('simplest', 'simplest')
   );
+
+/** The main function that executes the command. */
 export async function execute(interaction: CommandInteraction) {
   const from = interaction.options.getString('from', true);
   const to = interaction.options.getString('to', true);

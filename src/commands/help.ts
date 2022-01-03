@@ -24,6 +24,7 @@ export const data = new SlashCommandBuilder()
   .setName('help')
   .setDescription('Get help about the bots commands.');
 
+/** The main function that executes the command. */
 export async function execute(interaction: CommandInteraction) {
   const embedResponse: MessageEmbedOptions = {
     title: 'Help',

@@ -2,6 +2,8 @@ import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, MessageEmbedOptions } from 'discord.js';
 
 export const data = new SlashCommandBuilder().setName('ping').setDescription('Check the latency of the bot');
+
+/** The main function that executes the command. */
 export async function execute(interaction: CommandInteraction) {
   const embedResponse: MessageEmbedOptions = {
     title: 'Pong!',
