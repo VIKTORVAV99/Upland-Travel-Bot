@@ -5,7 +5,7 @@ import type { NodeId } from 'ngraph.graph';
 import type { MessageEmbedOptions } from 'discord.js';
 import type { Route } from './interfaces/route';
 
-const graph = createGraph();
+const graph = createGraph({ multigraph: true });
 
 /** The imported routes */
 const routes: Route[] = routesJSON;
@@ -38,7 +38,6 @@ export function travelToFrom(from: string, to: string, method: string | null): M
 
   /** Holds the path found by the pathfinder. */
   const foundPath = pathFinder.find(from, to).reverse();
-
   /** Holds the unfiltered path as an array */
   const pathArray: [NodeId, NodeId, { time: number; cost: number; type: string }][] = [];
   foundPath.forEach((node, index, array) => {
