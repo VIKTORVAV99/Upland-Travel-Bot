@@ -271,5 +271,104 @@
         "time": 32
       }
     ]
+  },
+  {
+    "from": "Los Angeles",
+    "to": "Manhattan",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 2480,
+        "time": 41
+      }
+    ]
+  },
+  {
+    "from": "Los Angeles",
+    "to": "Nashville",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 1800,
+        "time": 30
+      }
+    ]
+  },
+  {
+    "from": "Los Angeles",
+    "to": "Chicago",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 1750,
+        "time": 29
+      }
+    ]
+  },
+  {
+    "from": "Los Angeles",
+    "to": "New Orleans",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 1670,
+        "time": 28
+      }
+    ]
+  },
+  {
+    "from": "Los Angeles",
+    "to": "Kansas City",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 300,
+        "time": 23
+      }
+    ]
+  },
+  {
+    "from": "Los Angeles",
+    "to": "San Francisco",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 340,
+        "time": 6
+      }
+    ]
+  },
+  {
+    "from": "Los Angeles",
+    "to": "Bakersfield",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 40,
+        "time": 15
+      }
+    ]
+  },
+  {
+    "from": "Los Angeles",
+    "to": "Oakland",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 130,
+        "time": 50
+      }
+    ]
+  },
+  {
+    "from": "Los Angeles",
+    "to": "Fresno & Clovis",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 80,
+        "time": 30
+      }
+    ]
   }
 ]
