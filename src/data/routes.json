@@ -335,6 +335,11 @@
         "type": "plane",
         "cost": 340,
         "time": 6
+      },
+      {
+        "type": "train",
+        "cost": 130,
+        "time": 50.8
       }
     ]
   },
