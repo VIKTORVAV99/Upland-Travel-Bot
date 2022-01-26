@@ -322,7 +322,7 @@
     "modes": [
       {
         "type": "plane",
-        "cost": 300,
+        "cost": 1360,
         "time": 23
       }
     ]
