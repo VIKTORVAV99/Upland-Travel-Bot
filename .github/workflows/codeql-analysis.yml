@@ -21,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [$detected-codeql-languages]
+        language: ['javascript', 'typescript']
         # CodeQL supports [ $supported-codeql-languages ]
         # Learn more about CodeQL language support at https://git.io/codeql-language-support
 
