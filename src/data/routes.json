@@ -219,7 +219,7 @@
   },
   {
     "from": "San Francisco",
-    "to": "Fresno & Clovis",
+    "to": "Fresno",
     "modes": [
       {
         "type": "train",
@@ -241,7 +241,7 @@
   },
   {
     "from": "Bakersfield",
-    "to": "Fresno & Clovis",
+    "to": "Fresno",
     "modes": [
       {
         "type": "train",
@@ -367,7 +367,7 @@
   },
   {
     "from": "Los Angeles",
-    "to": "Fresno & Clovis",
+    "to": "Fresno",
     "modes": [
       {
         "type": "train",

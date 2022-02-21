@@ -12,8 +12,7 @@ export const cities: [name: string, value: string][] = [
   ['Oakland', 'Oakland'],
   ['Bakersfield', 'Bakersfield'],
   ['Santa Clara', 'Santa Clara'],
-  ['Fresno', 'Fresno & Clovis'],
-  ['Clovis', 'Fresno & Clovis'],
+  ['Fresno', 'Fresno'],
   ['Bronx', 'Bronx'],
   ['Los Angeles', 'Los Angeles'],
 ];
