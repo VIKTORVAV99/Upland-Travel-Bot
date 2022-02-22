@@ -3,22 +3,25 @@ import { hyperlink, SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, MessageEmbedOptions } from 'discord.js';
 import { cities } from '../data/cities.js';
 
-// Logic code
+/**
+ * ==== Logic code ====
+ */
 
 type CmMilesPropAPI = {
   query_time: number;
   props: Record<string, unknown>;
 };
 
-const props: {
+let props: {
   id: string;
   city: string;
   address: string;
 }[] = [];
-let fetchedAt: Date;
+let fetchedAt: Date = new Date();
 
-await fetchProperties();
-
+/**
+ * Get properties from the monKey Miles API and format them.
+ */
 async function fetchProperties() {
   props.splice(0, props.length);
   const APIData = await fetch('https://miles.api.cmstats.net/props')
@@ -28,21 +31,30 @@ async function fetchProperties() {
       return data as CmMilesPropAPI;
     });
 
-  const rawPropList = Object.keys(APIData.props).map((key) => APIData.props[key]) as {
-    id: string;
-    city: string;
-    address: string;
-  }[];
-
-  rawPropList.forEach((propData) => {
-    props.push({ id: propData.id, address: propData.address, city: propData.city.split(',')[0] });
-  });
+  props = Object.keys(APIData.props)
+    .map(
+      (key) =>
+        APIData.props[key] as {
+          id: string;
+          city: string;
+          address: string;
+        }
+    )
+    .map((propData) => {
+      return {
+        id: propData.id,
+        address: propData.address,
+        city: propData.city.split(',')[0],
+      };
+    });
 }
 
-setInterval(fetchProperties, 8.64e7);
+await fetchProperties();
+setInterval(fetchProperties, 10000); //8.64e7);
 
-// Command code
-
+/**
+ * ==== Command code ====
+ */
 // ToDo: Clean up and make the code more dynamic.
 export const data = new SlashCommandBuilder()
   .setName('cmprops')
@@ -61,20 +73,12 @@ export async function execute(interaction: CommandInteraction) {
   const responseArray1: string[] = [];
   const responseArray2: string[] = [];
   props.forEach((data) => {
-    if (
-      data.city === city &&
-      responseArray1.join('\n').length +
-        hyperlink(data.address, `https://play.upland.me/?prop_id=${data.id}`).length <=
-        1024
-    ) {
-      responseArray1.push(hyperlink(data.address, `https://play.upland.me/?prop_id=${data.id}`));
-    } else if (
-      data.city === city &&
-      responseArray2.join('\n').length +
-        hyperlink(data.address, `https://play.upland.me/?prop_id=${data.id}`).length <=
-        1024
-    ) {
-      responseArray2.push(hyperlink(data.address, `https://play.upland.me/?prop_id=${data.id}`));
+    const property = hyperlink(data.address, `https://play.upland.me/?prop_id=${data.id}`);
+
+    if (data.city === city && responseArray1.join('\n').length + property.length <= 1024) {
+      responseArray1.push(property);
+    } else if (data.city === city && responseArray2.join('\n').length + property.length <= 1024) {
+      responseArray2.push(property);
     }
   });
 
@@ -108,7 +112,6 @@ export async function execute(interaction: CommandInteraction) {
       text: `Updated at: ${fetchedAt.toUTCString()}\nSpecial thanks to CryptomonKeys and Green for the data.`,
     },
   };
-  console.log(embedResponse);
   await interaction.reply({ embeds: [embedResponse] });
 }
 
