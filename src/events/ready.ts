@@ -32,6 +32,7 @@ export async function execute(client: Client) {
       .then(() => console.log(`Successfully registered ${commands.length} application commands.`))
       .catch(console.error);
   }
-  const ready = `Ready!\nLogged in as ${client.user?.tag}`;
+  const botUsername = client.user?.tag;
+  const ready = `Ready!\nLogged in as ${botUsername}`;
   await registererCommands().then(() => console.log(ready));
 }
