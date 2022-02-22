@@ -6,9 +6,11 @@ import type { Command } from '../interfaces/command';
 
 export const name = 'ready';
 export const once = true;
+/**
+ * Code to be executed when the bot reaches a ready status.
+ * @param client
+ */
 export async function execute(client: Client) {
-  await registererCommands().then(() => console.log(`Ready!\nLogged in as ${client.user?.tag}`));
-
   // Automatic deployment of commands
   async function registererCommands() {
     const commands: unknown[] = [];
@@ -30,4 +32,6 @@ export async function execute(client: Client) {
       .then(() => console.log(`Successfully registered ${commands.length} application commands.`))
       .catch(console.error);
   }
+  const ready = `Ready!\nLogged in as ${client.user?.tag}`;
+  await registererCommands().then(() => console.log(ready));
 }
