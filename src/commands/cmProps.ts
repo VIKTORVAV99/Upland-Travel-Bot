@@ -50,7 +50,7 @@ async function fetchProperties() {
 }
 
 await fetchProperties();
-setInterval(fetchProperties, 10000); //8.64e7);
+setInterval(fetchProperties, 8.62e7);
 
 /**
  * ==== Command code ====
