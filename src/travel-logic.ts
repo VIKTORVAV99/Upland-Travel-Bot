@@ -1,6 +1,6 @@
 import path from 'ngraph.path';
 import createGraph from 'ngraph.graph';
-import routesJSON from './data/routes.json';
+import routesJSON from './data/routes.json' assert { type: 'json' };
 import type { NodeId } from 'ngraph.graph';
 import type { MessageEmbedOptions } from 'discord.js';
 import type { Route } from './interfaces/route';
