@@ -30,23 +30,26 @@ async function fetchProperties() {
       fetchedAt = new Date();
       return data as CmMilesPropAPI;
     });
-
-  props = Object.keys(APIData.props)
-    .map(
-      (key) =>
-        APIData.props[key] as {
-          id: string;
-          city: string;
-          address: string;
-        }
-    )
-    .map((propData) => {
-      return {
-        id: propData.id,
-        address: propData.address,
-        city: propData.city.split(',')[0],
-      };
-    });
+  try {
+    props = Object.keys(APIData.props)
+      .map(
+        (key) =>
+          APIData.props[key] as {
+            id: string;
+            city: string;
+            address: string;
+          }
+      )
+      .map((propData) => {
+        return {
+          id: propData.id,
+          address: propData.address,
+          city: propData.city.split(',')[0],
+        };
+      });
+  } catch {
+    console.warn('There was a problem converting the API response to the property object structure!');
+  }
 }
 
 await fetchProperties();
