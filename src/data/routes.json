@@ -375,5 +375,49 @@
         "time": 30
       }
     ]
+  },
+  {
+    "from": "Detroit",
+    "to": "Chicago",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 100,
+        "time": 37
+      }
+    ]
+  },
+  {
+    "from": "Detroit",
+    "to": "Cleveland",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 60,
+        "time": 23
+      }
+    ]
+  },
+  {
+    "from": "Detroit",
+    "to": "Nashville",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 190,
+        "time": 73
+      }
+    ]
+  },
+  {
+    "from": "Detroit",
+    "to": "Manhattan",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 220,
+        "time": 83
+      }
+    ]
   }
 ]

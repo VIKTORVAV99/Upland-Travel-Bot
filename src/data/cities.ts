@@ -15,4 +15,5 @@ export const cities: [name: string, value: string][] = [
   ['Fresno', 'Fresno'],
   ['Bronx', 'Bronx'],
   ['Los Angeles', 'Los Angeles'],
+  ['Detroit', 'Detroit'],
 ];
