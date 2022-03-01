@@ -419,5 +419,53 @@
         "time": 83
       }
     ]
+  },
+  {
+    "from": "Nashville",
+    "to": "New Orleans",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 190,
+        "time": 70.9
+      },
+      {
+        "type": "plane",
+        "cost": 490,
+        "time": 8.2
+      }
+    ]
+  },
+  {
+    "from": "Nashville",
+    "to": "Kansas City",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 190,
+        "time": 74
+      },
+      {
+        "type": "plane",
+        "cost": 470,
+        "time": 7.9
+      }
+    ]
+  },
+  {
+    "from": "New Orleans",
+    "to": "Kansas City",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 300,
+        "time": 114
+      },
+      {
+        "type": "plane",
+        "cost": 690,
+        "time": 12
+      }
+    ]
   }
 ]
