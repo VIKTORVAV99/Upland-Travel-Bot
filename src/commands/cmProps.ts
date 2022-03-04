@@ -79,9 +79,13 @@ export async function execute(interaction: CommandInteraction) {
   const responseArray1: string[] = [];
   const responseArray2: string[] = [];
   let embedResponse: MessageEmbedOptions = {};
+  let responseFields: { name: string; value: string }[] = [];
+  let hasProperties = false;
+  let title = '';
+  let description = '';
+  let footerText = '';
   apiError && fetchProperties();
   if (!apiError) {
-    let numOfProperties = 0;
     props.forEach((data) => {
       if (data.city === city) {
         const property = hyperlink(data.address, `https://play.upland.me/?prop_id=${data.id}`);
@@ -91,58 +95,54 @@ export async function execute(interaction: CommandInteraction) {
         } else if (responseArray2.join('\n').length + property.length <= 1024) {
           responseArray2.push(property);
         }
-        numOfProperties++;
+        hasProperties = true;
       }
     });
-
-    let responseFields = [];
-    if (numOfProperties === 0) {
-      embedResponse = {
-        color: 0xfbdd11,
-        title: `cryptomonKey properties`,
-        description: `There are no cryptomonKeys properties in ${city}`,
-        footer: {
-          text: `Updated at: ${fetchedAt.toUTCString()}\nSpecial thanks to cryptomonKeys and Green for the data.`,
-        },
-      };
-    } else {
-      if (responseArray2.length > 0) {
-        responseFields = [
-          {
-            name: 'Properties:',
-            value: responseArray1.join('\n'),
-          },
-          {
-            name: 'More properties:',
-            value: responseArray2.join('\n'),
-          },
-        ];
-      } else {
-        responseFields = [
-          {
-            name: 'Properties:',
-            value: responseArray1.join('\n'),
-          },
-        ];
-      }
-
-      embedResponse = {
-        color: 0xfbdd11,
-        title: `cryptomonKey properties`,
-        description: `The cryptomonKeys properties in ${city}`,
-        fields: responseFields,
-        footer: {
-          text: `Updated at: ${fetchedAt.toUTCString()}\nSpecial thanks to cryptomonKeys and Green for the data.`,
-        },
-      };
-    }
-  } else if (apiError) {
-    embedResponse = {
-      title: 'Error',
-      description: 'There was a error fetching the data.',
-      footer: { text: `Updated at: ${fetchedAt.toUTCString()}` },
-    };
   }
+  if (!hasProperties && !apiError) {
+    title = `cryptomonKey properties`;
+    description = `There are no cryptomonKeys properties in ${city}`;
+    footerText = `Updated at: ${fetchedAt.toUTCString()}\nSpecial thanks to cryptomonKeys and Green for the data.`;
+  } else if (hasProperties) {
+    if (responseArray2.length > 0) {
+      responseFields = [
+        {
+          name: 'Properties:',
+          value: responseArray1.join('\n'),
+        },
+        {
+          name: 'More properties:',
+          value: responseArray2.join('\n'),
+        },
+      ];
+    } else {
+      responseFields = [
+        {
+          name: 'Properties:',
+          value: responseArray1.join('\n'),
+        },
+      ];
+    }
+    title = `cryptomonKey properties`;
+    description = `The cryptomonKeys properties in ${city}`;
+    footerText = `Updated at: ${fetchedAt.toUTCString()}\nSpecial thanks to cryptomonKeys and Green for the data.`;
+  } else if (apiError) {
+    title = 'Error';
+    description = 'There was a error fetching the data.';
+    footerText = `Updated at: ${fetchedAt.toUTCString()}`;
+  }
+
+  const embed = (embedResponse = {
+    color: 0xfbdd11,
+    title: title,
+    description: description,
+    footer: { text: footerText },
+  });
+
+  if (responseFields !== []) {
+    embedResponse = { fields: responseFields, ...embed };
+  }
+
   await interaction.reply({ embeds: [embedResponse] });
 }
 
