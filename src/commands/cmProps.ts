@@ -1,7 +1,7 @@
-import fetch from 'node-fetch';
+import fetch from 'node-fetch'; //TODO: #95 Remove node-fetch once fetch is included in node.
 import { hyperlink, SlashCommandBuilder } from '@discordjs/builders';
-import { CommandInteraction, MessageEmbedOptions } from 'discord.js';
 import { cities } from '../data/cities.js';
+import type { CommandInteraction, MessageEmbedOptions } from 'discord.js';
 
 /**
  * ==== Logic code ====
@@ -12,12 +12,17 @@ type CmMilesPropAPI = {
   props: Record<string, unknown>;
 };
 
-let props: {
+type Props = {
   id: string;
   city: string;
   address: string;
-}[] = [];
+};
+
+let props: Props[] = [];
+
+/** The date properties where fetched from the API. */
 let fetchedAt: Date = new Date();
+/** Boolean to check if there was a API error. */
 let apiError = false;
 
 /**
@@ -32,15 +37,9 @@ async function fetchProperties() {
       return data as CmMilesPropAPI;
     });
   try {
+    //TODO: #94 Add Array.groupBy() later when it is stable.
     props = Object.keys(APIData.props)
-      .map(
-        (key) =>
-          APIData.props[key] as {
-            id: string;
-            city: string;
-            address: string;
-          }
-      )
+      .map((key) => APIData.props[key] as Props)
       .map((propData) => {
         return {
           id: propData.id,
@@ -61,7 +60,6 @@ setInterval(fetchProperties, 8.62e7);
 //
 // ==== Command code ====
 //
-// ToDo: Clean up and make the code more dynamic.
 export const data = new SlashCommandBuilder()
   .setName('cmprops')
   .setDescription('Shows the cryptomonKey properties in a city that can be used for monKey Miles')
@@ -73,23 +71,34 @@ export const data = new SlashCommandBuilder()
       .addChoices(cities.sort())
   );
 
-/** The main function that executes the command. */
+/**
+ * The main function that executes the command.
+ * @param interaction
+ */
 export async function execute(interaction: CommandInteraction) {
-  const city = interaction.options.getString('city');
+  /** The requested city. */
+  const city = interaction.options.getString('city') ?? '';
   const responseArray1: string[] = [];
   const responseArray2: string[] = [];
   let embedResponse: MessageEmbedOptions = {};
-  let responseFields: { name: string; value: string }[] = [];
+  /** Boolean to check if the requested city has cryptomonKey properties. */
   let hasProperties = false;
+  /** Title for the embed. */
   let title = '';
+  /** Description for the embed. */
   let description = '';
+  /** The text to include in the footer. */
   let footerText = '';
+  /** The fields to include in the embed. */
+  let responseFields: { name: string; value: string }[] = [];
+
   apiError && fetchProperties();
   if (!apiError) {
     props.forEach((data) => {
       if (data.city === city) {
         const property = hyperlink(data.address, `https://play.upland.me/?prop_id=${data.id}`);
 
+        //TODO: #96 Make the responseArray generation dynamic
         if (responseArray1.join('\n').length + property.length <= 1024) {
           responseArray1.push(property);
         } else if (responseArray2.join('\n').length + property.length <= 1024) {
@@ -146,5 +155,6 @@ export async function execute(interaction: CommandInteraction) {
   await interaction.reply({ embeds: [embedResponse] });
 }
 
+/** Description for the /help command. */
 export const helpDescription =
   'Shows the addresses for monKey Miles properties in the selected city.\nOptions:\n - `city` - The selected city';
