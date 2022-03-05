@@ -12,13 +12,13 @@ type CmMilesPropAPI = {
   props: Record<string, unknown>;
 };
 
-type Props = {
+type Property = {
   id: string;
   city: string;
   address: string;
 };
 
-let props: Props[] = [];
+let props: Property[] = [];
 
 /** The date properties where fetched from the API. */
 let fetchedAt: Date = new Date();
@@ -39,7 +39,7 @@ async function fetchProperties() {
   try {
     //TODO: #94 Add Array.groupBy() later when it is stable.
     props = Object.keys(APIData.props)
-      .map((key) => APIData.props[key] as Props)
+      .map((key) => APIData.props[key] as Property)
       .map((propData) => {
         return {
           id: propData.id,
