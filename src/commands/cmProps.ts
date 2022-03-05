@@ -77,7 +77,7 @@ export const data = new SlashCommandBuilder()
  */
 export async function execute(interaction: CommandInteraction) {
   /** The requested city. */
-  const city = interaction.options.getString('city') ?? '';
+  const city: string = interaction.options.getString('city') ?? '';
   const responseArray1: string[] = [];
   const responseArray2: string[] = [];
   let embedResponse: MessageEmbedOptions = {};
