@@ -75,12 +75,9 @@ export function travelToFrom(from: string, to: string, method: string | null): M
         }
       }
     } else if (
-      index > 0 &&
-      array[index - 1][0] !== array[index][0] &&
-      array[index - 1][1] !== array[index][1]
+      (index > 0 && array[index - 1][0] !== array[index][0] && array[index - 1][1] !== array[index][1]) ||
+      index === 0
     ) {
-      filteredPathArray.push(value);
-    } else if (index === 0) {
       filteredPathArray.push(value);
     }
   });
@@ -97,12 +94,12 @@ export function travelToFrom(from: string, to: string, method: string | null): M
           .join('\n')}`,
       },
       {
-        name: 'Total cost:',
+        name: 'Travel cost:',
         value: `${filteredPathArray.map((value) => value[2].cost).reduce((a, b) => a + b, 0)} UPX`,
         inline: true,
       },
       {
-        name: 'Total time:',
+        name: 'Travel time:',
         value: `${filteredPathArray.map((value) => value[2].time).reduce((a, b) => a + b, 0)} minutes`,
         inline: true,
       },
