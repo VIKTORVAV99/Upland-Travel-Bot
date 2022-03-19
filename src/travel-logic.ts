@@ -54,31 +54,34 @@ export function travelToFrom(from: string, to: string, method: string | null): M
   const filteredPathArray: [NodeId, NodeId, { time: number; cost: number; type: string }][] = [];
 
   /** Loops over the pathArray and check if the current paths to and from match the next paths to and from values. @type {number} */
-  pathArray.forEach((value, index, array) => {
+  pathArray.forEach((currentPath, index, array) => {
     if (
-      index + 1 < array.length &&
-      array[index][0] === array[index + 1][0] &&
-      array[index][1] === array[index + 1][1]
+      index === 0 ||
+      (index > 0 && array[index - 1][0] !== currentPath[0] && array[index - 1][1] !== currentPath[1])
+    ) {
+      filteredPathArray.push(currentPath);
+    } else if (
+      index > 0 &&
+      array[index - 1][0] === currentPath[0] &&
+      array[index - 1][1] === currentPath[1]
     ) {
       /** The minimum value for either time or cost. */
       const minValue =
         method === 'fastest'
-          ? Math.min(array[index][2].time, array[index + 1][2].time)
-          : Math.min(array[index][2].cost, array[index + 1][2].cost);
+          ? Math.min(array[index - 1][2].time, currentPath[2].time)
+          : Math.min(array[index - 1][2].cost, currentPath[2].cost);
 
-      /** Loops over the two matching paths and returns either the fastest or the cheapest */
-      for (let o = 0; o < 2; o++) {
-        if (method === 'fastest' && array[index + o][2].time === minValue) {
-          filteredPathArray.push(array[index + o]);
-        } else if (array[index + o][2].cost === minValue) {
-          filteredPathArray.push(array[index + o]);
+      /** Loops over the current and previous path and returns the path with the matching minValue. */
+      for (let o = 0; o <= 1; o++) {
+        if (
+          ((method === 'fastest' && array[index - 1 + o][2].time === minValue) ||
+            array[index - 1 + o][2].cost === minValue) &&
+          array[index - 1] !== array[index - 1 + o]
+        ) {
+          filteredPathArray.pop();
+          filteredPathArray.push(currentPath);
         }
       }
-    } else if (
-      (index > 0 && array[index - 1][0] !== array[index][0] && array[index - 1][1] !== array[index][1]) ||
-      index === 0
-    ) {
-      filteredPathArray.push(value);
     }
   });
 
