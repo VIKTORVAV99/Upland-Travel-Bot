@@ -85,6 +85,21 @@ export function travelToFrom(from: string, to: string, method: string | null): M
       }
     }
   });
+  /** The amount of sends needed to travel between point A and point B. */
+  let sends = 1;
+  filteredPathArray.forEach((currentPath, index, array) => {
+    if (index > 0) {
+      if (
+        currentPath.data.type === array[index - 1].data.type ||
+        (currentPath.data.type === 'bus' && array[index - 1].data.type === 'train') ||
+        (currentPath.data.type === 'train' && array[index - 1].data.type === 'bus')
+      ) {
+        return;
+      } else if (currentPath.data.type !== array[index - 1].data.type) {
+        sends++;
+      }
+    }
+  });
 
   const embedResponse: MessageEmbedOptions = {
     color: 0x36c6ff,
@@ -107,6 +122,11 @@ export function travelToFrom(from: string, to: string, method: string | null): M
       {
         name: 'Travel time:',
         value: `${filteredPathArray.map((path) => path.data.time).reduce((a, b) => a + b, 0)} minutes`,
+        inline: true,
+      },
+      {
+        name: 'Sends needed:',
+        value: `${sends} sends`,
         inline: true,
       },
     ],
