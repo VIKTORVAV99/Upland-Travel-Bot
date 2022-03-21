@@ -1,9 +1,8 @@
 import path from 'ngraph.path';
 import createGraph from 'ngraph.graph';
 import routesJSON from './data/routes.json' assert { type: 'json' };
-import type { NodeId } from 'ngraph.graph';
 import type { MessageEmbedOptions } from 'discord.js';
-import type { Route } from './interfaces/route';
+import type { Route, RouteData } from './interfaces/route';
 
 const graph = createGraph({ multigraph: true });
 
@@ -39,11 +38,11 @@ export function travelToFrom(from: string, to: string, method: string | null): M
   /** Holds the path found by the pathfinder. */
   const foundPath = pathFinder.find(from, to).reverse();
   /** Holds the unfiltered path as an array */
-  const pathArray: [NodeId, NodeId, { time: number; cost: number; type: string }][] = [];
+  const pathArray: RouteData[] = [];
   foundPath.forEach((node, index, array) => {
     Array.from(new Set(node.links)).forEach((link) => {
       if (link.fromId === array[index].id && link.toId === array[index + 1]?.id) {
-        pathArray.push([link.fromId, link.toId, link.data]);
+        pathArray.push({ node1: link.fromId, node2: link.toId, data: link.data });
       }
     });
   });
@@ -51,31 +50,33 @@ export function travelToFrom(from: string, to: string, method: string | null): M
   /** Holds the filtered path as an array.
    *  @type {array}
    */
-  const filteredPathArray: [NodeId, NodeId, { time: number; cost: number; type: string }][] = [];
+  const filteredPathArray: RouteData[] = [];
 
   /** Loops over the pathArray and check if the current paths to and from match the next paths to and from values. @type {number} */
   pathArray.forEach((currentPath, index, array) => {
     if (
       index === 0 ||
-      (index > 0 && array[index - 1][0] !== currentPath[0] && array[index - 1][1] !== currentPath[1])
+      (index > 0 &&
+        array[index - 1].node1 !== currentPath.node1 &&
+        array[index - 1].node2 !== currentPath.node2)
     ) {
       filteredPathArray.push(currentPath);
     } else if (
       index > 0 &&
-      array[index - 1][0] === currentPath[0] &&
-      array[index - 1][1] === currentPath[1]
+      array[index - 1].node1 === currentPath.node1 &&
+      array[index - 1].node2 === currentPath.node2
     ) {
       /** The minimum value for either time or cost. */
       const minValue =
         method === 'fastest'
-          ? Math.min(array[index - 1][2].time, currentPath[2].time)
-          : Math.min(array[index - 1][2].cost, currentPath[2].cost);
+          ? Math.min(array[index - 1].data.time, currentPath.data.time)
+          : Math.min(array[index - 1].data.cost, currentPath.data.cost);
 
       /** Loops over the current and previous path and returns the path with the matching minValue. */
       for (let o = 0; o <= 1; o++) {
         if (
-          ((method === 'fastest' && array[index - 1 + o][2].time === minValue) ||
-            array[index - 1 + o][2].cost === minValue) &&
+          ((method === 'fastest' && array[index - 1 + o].data.time === minValue) ||
+            array[index - 1 + o].data.cost === minValue) &&
           array[index - 1] !== array[index - 1 + o]
         ) {
           filteredPathArray.pop();
@@ -93,17 +94,19 @@ export function travelToFrom(from: string, to: string, method: string | null): M
       {
         name: 'Route:',
         value: `${filteredPathArray
-          .map((value, index) => [`${index + 1}. ${value[0]} \u279c (${value[2].type}) \u279c ${value[1]}`])
+          .map((path, index) => [
+            `${index + 1}. ${path.node1} \u279c (${path.data.type}) \u279c ${path.node2}`,
+          ])
           .join('\n')}`,
       },
       {
         name: 'Travel cost:',
-        value: `${filteredPathArray.map((value) => value[2].cost).reduce((a, b) => a + b, 0)} UPX`,
+        value: `${filteredPathArray.map((path) => path.data.cost).reduce((a, b) => a + b, 0)} UPX`,
         inline: true,
       },
       {
         name: 'Travel time:',
-        value: `${filteredPathArray.map((value) => value[2].time).reduce((a, b) => a + b, 0)} minutes`,
+        value: `${filteredPathArray.map((path) => path.data.time).reduce((a, b) => a + b, 0)} minutes`,
         inline: true,
       },
     ],
