@@ -467,5 +467,60 @@
         "time": 12
       }
     ]
+  },
+  {
+    "from": "Queens",
+    "to": "Bronx",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 10,
+        "time": 2.1
+      }
+    ]
+  },
+  {
+    "from": "Queens",
+    "to": "Manhattan",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 10,
+        "time": 1.7
+      }
+    ]
+  },
+  {
+    "from": "Queens",
+    "to": "Brooklyn",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 10,
+        "time": 1.9
+      }
+    ]
+  },
+  {
+    "from": "Queens",
+    "to": "Rutherford",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 10,
+        "time": 3.1
+      }
+    ]
+  },
+  {
+    "from": "Queens",
+    "to": "Staten Island",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 10,
+        "time": 4.4
+      }
+    ]
   }
 ]
