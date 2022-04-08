@@ -5,8 +5,8 @@
     "modes": [
       {
         "type": "train",
-        "cost": 25,
-        "time": 25
+        "cost": 20,
+        "time": 4
       }
     ]
   },
