@@ -1,6 +1,5 @@
 import fetch from 'node-fetch'; //TODO: #95 Remove node-fetch once fetch is included in node.
-import { SlashCommandBuilder } from '@discordjs/builders';
-import { Formatters } from 'discord.js';
+import { inlineCode, SlashCommandBuilder } from '@discordjs/builders';
 import type { CommandInteraction, EmbedFieldData, MessageEmbedOptions } from 'discord.js';
 interface CmAPIWinners {
   query_time: number;
@@ -23,8 +22,16 @@ export async function execute(interaction: CommandInteraction) {
   let APIData: CmAPIWinners = Object(null);
   /** Boolean to check if there was a API error. */
   let apiError = false;
+
+  const today = new Date();
+  const yesterday = new Date(today);
+
+  yesterday.setDate(yesterday.getDate() - 1);
+  const todayString = today.toISOString().slice(0, -14);
+  const yesterdayString = yesterday.toISOString().slice(0, -14);
+
   try {
-    APIData = await fetch('https://miles.api.cmstats.net/drops?limit=10')
+    APIData = await fetch(`https://miles.api.cmstats.net/drops?after=${yesterdayString}`)
       .then((response) => response.json())
       .then((data) => {
         /** The date properties where fetched from the API. */
@@ -42,22 +49,46 @@ export async function execute(interaction: CommandInteraction) {
     title = 'Error';
     description = 'There was a error when parsing the API data.';
   } else {
-    const data = APIData?.data.map((data) => {
-      const date = new Date(data.issue_time);
-      const formattedDate = new Intl.DateTimeFormat('sv-SE', {
-        dateStyle: 'short',
-        timeStyle: 'short',
-      }).format(date);
-      return { time: formattedDate, type: data.type, winners: data.winners };
-    });
+    const data = APIData?.data
+      .map((data) => {
+        return {
+          date: new Date(data.issue_time).toISOString().slice(0, -14),
+          formattedTime: inlineCode(new Date(data.issue_time).toISOString().slice(-13, -8)),
+          type: inlineCode((data.type.charAt(0).toUpperCase() + data.type.slice(1)).padEnd(8)),
+          winners: data.winners.map((winner) => inlineCode(winner)),
+        };
+      })
+      .reduce((group, winners) => {
+        const category = winners.date;
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore
+        group[category] = group[category] ?? [];
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore
+        group[category].push(winners);
+        return group;
+      }, {});
 
-    title = 'Last 10 winners';
+    title = 'The last winners';
+
     fields = [
       {
-        name: 'Winners:',
-        value: `${data
-          .map((value) => [
-            `${Formatters.inlineCode(value.time)} - ${value.type} - ${value.winners.join(', ')}`,
+        name: 'Today:',
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore
+        value: `${data[todayString]
+          .map((value: { formattedTime: string; type: string; winners: string[] }) => [
+            `${value.formattedTime} - ${value.type} - ${value.winners.join(' and ')}`,
+          ])
+          .join('\n')}`,
+      },
+      {
+        name: 'Yesterday:',
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore
+        value: `${data[yesterdayString]
+          .map((value: { formattedTime: string; type: string; winners: string[] }) => [
+            `${value.formattedTime} - ${value.type} - ${value.winners.join(' and ')}`,
           ])
           .join('\n')}`,
       },
