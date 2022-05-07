@@ -1,32 +1,38 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { travelToFrom } from '../travel-logic.js';
 import { cities } from '../data/cities.js';
-import { CommandInteraction } from 'discord.js';
+import type { CommandInteraction } from 'discord.js';
+import type { APIApplicationCommandOptionChoice } from 'discord-api-types/v10';
+import type { SlashCommandStringOption } from '@discordjs/builders';
+
+const methods: APIApplicationCommandOptionChoice<string>[] = [
+  { name: 'Cheapest', value: 'cheapest' },
+  { name: 'Fastest', value: 'fastest' },
+  { name: 'Simplest', value: 'simplest' },
+];
 
 export const data = new SlashCommandBuilder()
   .setName('travel')
   .setDescription('Gives you the best route from point A to point B based on the selected method.')
-  .addStringOption((option) =>
+  .addStringOption((option: SlashCommandStringOption) =>
     option
       .setName('from')
       .setDescription('Enter the destination you are traveling from.')
       .setRequired(true)
-      .addChoices(cities.sort())
+      .addChoices(...cities.sort())
   )
-  .addStringOption((option) =>
+  .addStringOption((option: SlashCommandStringOption) =>
     option
       .setName('to')
       .setDescription('Enter the destination you are traveling to.')
       .setRequired(true)
-      .addChoices(cities.sort())
+      .addChoices(...cities.sort())
   )
-  .addStringOption((option) =>
+  .addStringOption((option: SlashCommandStringOption) =>
     option
       .setName('method')
       .setDescription('The method used to find the route.')
-      .addChoice('cheapest', 'cheapest')
-      .addChoice('fastest', 'fastest')
-      .addChoice('simplest', 'simplest')
+      .addChoices(...methods)
   );
 
 /** The main function that executes the command. */

@@ -2,6 +2,7 @@ import fetch from 'node-fetch'; //TODO: #95 Remove node-fetch once fetch is incl
 import { hyperlink, SlashCommandBuilder } from '@discordjs/builders';
 import { cities } from '../data/cities.js';
 import type { CommandInteraction, MessageEmbedOptions } from 'discord.js';
+import type { SlashCommandStringOption } from '@discordjs/builders';
 
 /**
  * ==== Logic code ====
@@ -44,7 +45,7 @@ async function fetchProperties() {
         return {
           id: propData.id,
           address: propData.address,
-          city: propData.city.split(',')[0],
+          city: propData.city.split(',', 1).toString(),
         };
       });
     apiError = false;
@@ -63,12 +64,12 @@ setInterval(fetchProperties, 8.62e7);
 export const data = new SlashCommandBuilder()
   .setName('cmprops')
   .setDescription('Shows the cryptomonKey properties in a city that can be used for monKey Miles')
-  .addStringOption((option) =>
+  .addStringOption((option: SlashCommandStringOption) =>
     option
       .setName('city')
       .setDescription('The city you want the CM properties for.')
       .setRequired(true)
-      .addChoices(cities.sort())
+      .addChoices(...cities.sort())
   );
 
 /**
