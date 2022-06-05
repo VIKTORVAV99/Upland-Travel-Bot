@@ -522,5 +522,76 @@
         "time": 4.4
       }
     ]
+  },
+  {
+    "from": "Las Vegas",
+    "to": "San Francisco",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 410,
+        "time": 7
+      }
+    ]
+  },
+  {
+    "from": "Las Vegas",
+    "to": "Los Angeles",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 240,
+        "time": 4
+      },
+      {
+        "type": "bus",
+        "cost": 50,
+        "time": 112
+      }
+    ]
+  },
+  {
+    "from": "Las Vegas",
+    "to": "New York",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 2250,
+        "time": 37
+      }
+    ]
+  },
+  {
+    "from": "Las Vegas",
+    "to": "Chicago",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 1510,
+        "time": 25
+      }
+    ]
+  },
+  {
+    "from": "Las Vegas",
+    "to": "Bakersfield",
+    "modes": [
+      {
+        "type": "bus",
+        "cost": 60,
+        "time": 118
+      }
+    ]
+  },
+  {
+    "from": "Las Vegas",
+    "to": "Fresno",
+    "modes": [
+      {
+        "type": "bus",
+        "cost": 80,
+        "time": 164
+      }
+    ]
   }
 ]
