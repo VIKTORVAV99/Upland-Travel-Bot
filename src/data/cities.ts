@@ -19,4 +19,5 @@ export const cities: APIApplicationCommandOptionChoice<string>[] = [
   { name: 'Los Angeles', value: 'Los Angeles' },
   { name: 'Detroit', value: 'Detroit' },
   { name: 'Queens', value: 'Queens' },
+  { name: 'Las Vegas', value: 'Las Vegas' },
 ];
