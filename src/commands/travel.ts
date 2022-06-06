@@ -19,14 +19,14 @@ export const data = new SlashCommandBuilder()
       .setName('from')
       .setDescription('Enter the destination you are traveling from.')
       .setRequired(true)
-      .addChoices(...cities.sort())
+      .addChoices(...cities)
   )
   .addStringOption((option: SlashCommandStringOption) =>
     option
       .setName('to')
       .setDescription('Enter the destination you are traveling to.')
       .setRequired(true)
-      .addChoices(...cities.sort())
+      .addChoices(...cities)
   )
   .addStringOption((option: SlashCommandStringOption) =>
     option

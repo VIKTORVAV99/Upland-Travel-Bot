@@ -69,7 +69,7 @@ export const data = new SlashCommandBuilder()
       .setName('city')
       .setDescription('The city you want the CM properties for.')
       .setRequired(true)
-      .addChoices(...cities.sort())
+      .addChoices(...cities)
   );
 
 /**
