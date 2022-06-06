@@ -19,18 +19,18 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@discordjs/builders": "^0.14.0",
+    "@discordjs/builders": "^0.15.0",
     "@discordjs/rest": "^0.5.0",
     "discord-api-types": "^0.33.2",
-    "discord.js": "^13.7.0",
+    "discord.js": "^13.8.0",
     "dotenv": "^16.0.1",
     "ngraph.graph": "^20.0.0",
     "ngraph.path": "^1.4.0",
     "node-fetch": "^3.2.5"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.27.0",
-    "@typescript-eslint/parser": "^5.27.0",
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "@typescript-eslint/parser": "^5.27.1",
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
     "husky": "^8.0.1",
