@@ -27,7 +27,7 @@ jobs:
               - '*.js'
             TypeScript:
               - '*.ts'
-          
+
   detect_changes:
     name: Changed Files
     runs-on: ubuntu-latest
@@ -49,8 +49,7 @@ jobs:
         with:
           files: |
             **/*.ts
-        
-    
+
   #superlinter:
   #  name: Super-Linter
   #  runs-on: ubuntu-latest
