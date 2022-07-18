@@ -14,25 +14,61 @@ on:
   workflow_dispatch:
 
 jobs:
-  superlinter:
-    name: Super-Linter
+  filter:
+    name: Path Filter
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      - name: Paths Changes Filter
+        id: path-filter
+        uses: dorny/paths-filter@v2.10.2
         with:
-          # Full git history is needed to get a proper list of changed files within `super-linter`
-          fetch-depth: 0
-      - name: Super-Linter
-        uses: github/super-linter/slim@v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          JAVASCRIPT_DEFAULT_STYLE: prettier
-          TYPESCRIPT_DEFAULT_STYLE: prettier
-          LINTER_RULES_PATH: /
-          JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.json
-          TYPESCRIPT_ES_CONFIG_FILE: .eslintrc.json
-          VALIDATE_ALL_CODEBASE: false
+          filters: |
+            JavaScript:
+              - '*.js'
+            TypeScript:
+              - '*.ts'
+
+  detect_changes:
+    name: Changed Files
+    runs-on: ubuntu-latest
+    outputs:
+      js: ${{ steps.changed-files-js.outputs.any_changed }}
+      ts: ${{ steps.changed-files-ts.outputs.any_changed }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Check JS files
+        id: changed-files-js
+        uses: tj-actions/changed-files@v23
+        with:
+          files: |
+            **/*.js
+      - name: Check TS files
+        id: changed-files-ts
+        uses: tj-actions/changed-files@v23
+        with:
+          files: |
+            **/*.ts
+
+  #superlinter:
+  #  name: Super-Linter
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - name: Checkout Code
+  #      uses: actions/checkout@v3
+  #      with:
+  #        # Full git history is needed to get a proper list of changed files within `super-linter`
+  #        fetch-depth: 0
+  #    - name: Super-Linter
+  #      uses: github/super-linter/slim@v4
+  #      env:
+  #        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #        JAVASCRIPT_DEFAULT_STYLE: prettier
+  #        TYPESCRIPT_DEFAULT_STYLE: prettier
+  #        LINTER_RULES_PATH: /
+  #        JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.json
+  #        TYPESCRIPT_ES_CONFIG_FILE: .eslintrc.json
+  #        VALIDATE_ALL_CODEBASE: false
 
   lint:
     name: ESLint
