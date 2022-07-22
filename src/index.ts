@@ -2,14 +2,14 @@
 import 'dotenv/config';
 import { readdirSync } from 'fs';
 // Require the necessary discord.js classes
-import { Client, Collection, Intents } from 'discord.js';
+import { Client, Collection, GatewayIntentBits } from 'discord.js';
 // Types
 import type { CustomClient } from './utils/customClient';
 import type { Command } from './interfaces/command';
 import type { Event } from './interfaces/event';
 
 // Create a new client instance
-const client: CustomClient = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client: CustomClient = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
 

@@ -1,8 +1,12 @@
 import fetch from 'node-fetch'; //TODO: #95 Remove node-fetch once fetch is included in node.
-import { hyperlink, SlashCommandBuilder } from '@discordjs/builders';
 import { cities } from '../data/cities.js';
-import type { CommandInteraction, MessageEmbedOptions } from 'discord.js';
-import type { SlashCommandStringOption } from '@discordjs/builders';
+import {
+  type CommandInteraction,
+  type APIEmbed,
+  hyperlink,
+  SlashCommandBuilder,
+  SlashCommandStringOption,
+} from 'discord.js';
 
 /**
  * ==== Logic code ====
@@ -81,7 +85,7 @@ export async function execute(interaction: CommandInteraction) {
   const city: string = interaction.options.getString('city') ?? '';
   const responseArray1: string[] = [];
   const responseArray2: string[] = [];
-  let embedResponse: MessageEmbedOptions = {};
+  let embedResponse: APIEmbed = {};
   /** Boolean to check if the requested city has cryptomonKey properties. */
   let hasProperties = false;
   /** Title for the embed. */

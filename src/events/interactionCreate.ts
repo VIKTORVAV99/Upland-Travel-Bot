@@ -1,8 +1,9 @@
+import { InteractionType } from 'discord.js';
 import { CustomCommandInteraction } from '../utils/customCommandInteraction';
 
 export const name = 'interactionCreate';
 export async function execute(interaction: CustomCommandInteraction) {
-  if (!interaction.isCommand()) return;
+  if (!(interaction.type === InteractionType.ApplicationCommand)) return;
 
   const command = interaction.client.commands?.get(interaction.commandName);
 

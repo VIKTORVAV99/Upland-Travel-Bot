@@ -1,5 +1,4 @@
-import { hyperlink, SlashCommandBuilder, userMention } from '@discordjs/builders';
-import { CommandInteraction, MessageEmbedOptions } from 'discord.js';
+import { CommandInteraction, APIEmbed, SlashCommandBuilder, hyperlink, userMention } from 'discord.js';
 import { convertMs } from '../utils/msToLongTime.js';
 import { plural } from '../utils/plural.js';
 
@@ -16,7 +15,7 @@ export async function execute(interaction: CommandInteraction) {
   const readyAt: string = interaction.client.readyAt?.toUTCString() ?? 'Error';
   const createdAt: string = interaction.createdAt.toUTCString();
   const botRepo: string = hyperlink('GitHub', 'https://github.com/VIKTORVAV99/Upland-Travel-Bot');
-  const embedResponse: MessageEmbedOptions = {
+  const embedResponse: APIEmbed = {
     title: 'Bot info',
     description: 'Basic information about the bot.',
     fields: [

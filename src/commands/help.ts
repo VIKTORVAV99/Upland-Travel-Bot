@@ -1,6 +1,5 @@
 import { readdirSync } from 'fs';
-import { SlashCommandBuilder } from '@discordjs/builders';
-import { CommandInteraction, EmbedField, MessageEmbedOptions } from 'discord.js';
+import { CommandInteraction, EmbedField, APIEmbed, SlashCommandBuilder } from 'discord.js';
 import { Command } from '../interfaces/command';
 
 const commandFiles = readdirSync('dist/commands').filter((file) => file.endsWith('.js'));
@@ -26,7 +25,7 @@ export const data = new SlashCommandBuilder()
 
 /** The main function that executes the command. */
 export async function execute(interaction: CommandInteraction) {
-  const embedResponse: MessageEmbedOptions = {
+  const embedResponse: APIEmbed = {
     title: 'Help',
     description: 'Information about the different commands.',
     fields: commandHelpArray,
