@@ -20,4 +20,5 @@ export const cities: APIApplicationCommandOptionChoice<string>[] = [
   { name: 'Detroit', value: 'Detroit' },
   { name: 'Queens', value: 'Queens' },
   { name: 'Las Vegas', value: 'Las Vegas' },
+  { name: 'Rio de Janeiro', value: 'Rio de Janeiro' },
 ].sort((a, b) => a.name.localeCompare(b.name));

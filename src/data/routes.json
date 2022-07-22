@@ -593,5 +593,49 @@
         "time": 164
       }
     ]
+  },
+  {
+    "from": "Rio de Janeiro",
+    "to": "Los Angeles",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 4410,
+        "time": 105
+      }
+    ]
+  },
+  {
+    "from": "Rio de Janeiro",
+    "to": "San Francisco",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 4620,
+        "time": 110
+      }
+    ]
+  },
+  {
+    "from": "Rio de Janeiro",
+    "to": "Chicago",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 3710,
+        "time": 88
+      }
+    ]
+  },
+  {
+    "from": "Rio de Janeiro",
+    "to": "Manhattan",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 3710,
+        "time": 80
+      }
+    ]
   }
 ]
