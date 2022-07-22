@@ -1,7 +1,7 @@
 import path from 'ngraph.path';
 import createGraph from 'ngraph.graph';
 import routesJSON from './data/routes.json' assert { type: 'json' };
-import type { MessageEmbedOptions } from 'discord.js';
+import type { APIEmbed } from 'discord.js';
 import type { Route, RouteData } from './interfaces/route';
 
 const graph = createGraph({ multigraph: true });
@@ -23,7 +23,7 @@ routes.forEach((route) => {
  * @param to Point B.
  * @param method The method to use when finding the path.
  */
-export function travelToFrom(from: string, to: string, method: string | null): MessageEmbedOptions {
+export function travelToFrom(from: string, to: string, method: string | null): APIEmbed {
   let pathFinder = undefined;
   if (method === 'simplest' || method === null) {
     pathFinder = path.nba(graph);
@@ -101,7 +101,7 @@ export function travelToFrom(from: string, to: string, method: string | null): M
     }
   });
 
-  const embedResponse: MessageEmbedOptions = {
+  const embedResponse: APIEmbed = {
     color: 0x36c6ff,
     title: `${from} to ${to}`,
     description: `The ${method ?? 'simplest'} route from ${from} to ${to}.`,

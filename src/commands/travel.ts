@@ -1,9 +1,11 @@
-import { SlashCommandBuilder } from '@discordjs/builders';
 import { travelToFrom } from '../travel-logic.js';
 import { cities } from '../data/cities.js';
-import type { CommandInteraction } from 'discord.js';
-import type { APIApplicationCommandOptionChoice } from 'discord-api-types/v10';
-import type { SlashCommandStringOption } from '@discordjs/builders';
+import {
+  APIApplicationCommandOptionChoice,
+  CommandInteraction,
+  SlashCommandBuilder,
+  SlashCommandStringOption,
+} from 'discord.js';
 
 const methods: APIApplicationCommandOptionChoice<string>[] = [
   { name: 'Cheapest', value: 'cheapest' },
