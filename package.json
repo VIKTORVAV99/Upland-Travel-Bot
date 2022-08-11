@@ -21,7 +21,7 @@
   "dependencies": {
     "@discordjs/builders": "^1.1.0",
     "@discordjs/rest": "^1.0.1",
-    "discord-api-types": "^0.37.1",
+    "discord-api-types": "^0.37.2",
     "discord.js": "^13.10.1",
     "dotenv": "^16.0.1",
     "ngraph.graph": "^20.0.0",
