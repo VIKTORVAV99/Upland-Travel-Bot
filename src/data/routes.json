@@ -637,5 +637,60 @@
         "time": 80
       }
     ]
+  },
+  {
+    "from": "Lisbon",
+    "to": "Los Angeles",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 3920,
+        "time": 93
+      }
+    ]
+  },
+  {
+    "from": "Lisbon",
+    "to": "San Francisco",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 3910,
+        "time": 93
+      }
+    ]
+  },
+  {
+    "from": "Lisbon",
+    "to": "Chicago",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 2760,
+        "time": 66
+      }
+    ]
+  },
+  {
+    "from": "Lisbon",
+    "to": "Manhattan",
+    "modes": [
+      {
+        "type": "plane",
+        "cost": 2330,
+        "time": 55
+      }
+    ]
+  },
+  {
+    "from": "Porto",
+    "to": "Lisbon",
+    "modes": [
+      {
+        "type": "train",
+        "cost": 70,
+        "time": 26
+      }
+    ]
   }
 ]
