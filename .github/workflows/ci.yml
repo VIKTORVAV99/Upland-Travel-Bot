@@ -14,20 +14,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  filter:
-    name: Path Filter
-    runs-on: ubuntu-latest
-    steps:
-      - name: Paths Changes Filter
-        id: path-filter
-        uses: dorny/paths-filter@v2.10.2
-        with:
-          filters: |
-            JavaScript:
-              - '*.js'
-            TypeScript:
-              - '*.ts'
-
   detect_changes:
     name: Changed Files
     runs-on: ubuntu-latest
