@@ -23,16 +23,16 @@
   },
   "dependencies": {
     "@discordjs/builders": "^1.1.0",
-    "@discordjs/rest": "^1.0.1",
+    "@discordjs/rest": "^1.1.0",
     "discord-api-types": "^0.37.2",
     "discord.js": "^13.10.1",
-    "dotenv": "^16.0.1",
+    "dotenv": "^16.0.2",
     "ngraph.graph": "^20.0.0",
     "ngraph.path": "^1.4.0",
     "node-fetch": "^3.2.10"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@typescript-eslint/eslint-plugin": "^5.38.0",
     "@typescript-eslint/parser": "^5.33.1",
     "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
