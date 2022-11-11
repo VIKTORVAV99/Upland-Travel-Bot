@@ -27,7 +27,7 @@
     "discord-api-types": "^0.37.2",
     "discord.js": "^13.10.1",
     "dotenv": "^16.0.2",
-    "ngraph.graph": "^20.0.0",
+    "ngraph.graph": "^20.0.1",
     "ngraph.path": "^1.4.0",
     "node-fetch": "^3.2.10"
   },
